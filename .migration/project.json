@@ -1,9 +1,9 @@
 {
   "type": "xwalk",
-  "LibraryUrl": "https://main--kv--gabrielwalt.aem.page/tools/sidekick/library.json",
+  "LibraryUrl": "https://main--koffie--gabrielwalt.aem.page/tools/sidekick/library.json",
   "contentHostUrl": "https://author-p189820-e1977856.adobeaemcloud.com",
-  "aemSitePath": "/content/kv",
-  "aemAssetsFolderPath": "/content/dam/kv",
+  "aemSitePath": "/content/koffie",
+  "aemAssetsFolderPath": "/content/dam/koffie",
   "aemSiteName": "kv",
   "aemSiteTitle": "Koffievoordeel",
   "baseUrl": "https://www.koffievoordeel.nl/"

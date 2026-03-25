@@ -1,14 +1,14 @@
 # AGENTS.md
 
-## This repository: **kv**
+## This repository: **koffie**
 
 Crosswalk project for importing selected **[koffievoordeel.nl](https://www.koffievoordeel.nl/)** pages into AEM Universal Editor + Edge Delivery.
 
 | | |
 |--|--|
-| **GitHub** | [gabrielwalt/kv](https://github.com/gabrielwalt/kv) |
-| **AEM Author** | [content/kv index](https://author-p189820-e1977856.adobeaemcloud.com/content/kv/index.html) |
-| **EDS preview** | [main--kv--gabrielwalt.aem.page](https://main--kv--gabrielwalt.aem.page/) |
+| **GitHub** | [gabrielwalt/koffie](https://github.com/gabrielwalt/koffie) |
+| **AEM Author** | [content/koffie index](https://author-p189820-e1977856.adobeaemcloud.com/content/koffie/index.html) |
+| **EDS preview** | [main--koffie--gabrielwalt.aem.page](https://main--koffie--gabrielwalt.aem.page/) |
 
 **Scope**: source URLs, blocks, tokens, import parsers, and migration checklist live in [PROJECT.md](./PROJECT.md). Update that file when you add parsers, new blocks, or complete a page import.
 
@@ -16,7 +16,7 @@ Crosswalk project for importing selected **[koffievoordeel.nl](https://www.koffi
 
 **This repository targets AEM Edge Delivery Services with the Universal Editor (UE)** — often called **crosswalk** or **xwalk**. It is **not** a Document Authoring (Google Docs / SharePoint) project.
 
-Typical starting point: [kv](https://github.com/gabrielwalt/kv) and the [UE tutorial](https://www.aem.live/developer/ue-tutorial).
+Typical starting point: [kv](https://github.com/gabrielwalt/koffie) and the [UE tutorial](https://www.aem.live/developer/ue-tutorial).
 
 **What crosswalk means in practice**
 

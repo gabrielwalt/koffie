@@ -1,4 +1,4 @@
-# Project reference — **kv** (Koffievoordeel → EDS Crosswalk)
+# Project reference — **koffie** (Koffievoordeel → EDS Crosswalk)
 
 Living inventory: environments, source pages, blocks, tokens, import tooling, and migration status.
 
@@ -6,22 +6,22 @@ Living inventory: environments, source pages, blocks, tokens, import tooling, an
 
 | Role | URL |
 |------|-----|
-| **GitHub** | [https://github.com/gabrielwalt/kv](https://github.com/gabrielwalt/kv) |
-| **AEM Author** (content) | [https://author-p189820-e1977856.adobeaemcloud.com/content/kv/index.html](https://author-p189820-e1977856.adobeaemcloud.com/content/kv/index.html) |
-| **EDS preview** | [https://main--kv--gabrielwalt.aem.page/](https://main--kv--gabrielwalt.aem.page/) |
-| **EDS live** | `https://main--kv--gabrielwalt.aem.live/` |
+| **GitHub** | [https://github.com/gabrielwalt/koffie](https://github.com/gabrielwalt/koffie) |
+| **AEM Author** (content) | [https://author-p189820-e1977856.adobeaemcloud.com/content/koffie/index.html](https://author-p189820-e1977856.adobeaemcloud.com/content/koffie/index.html) |
+| **EDS preview** | [https://main--koffie--gabrielwalt.aem.page/](https://main--koffie--gabrielwalt.aem.page/) |
+| **EDS live** | `https://main--koffie--gabrielwalt.aem.live/` |
 
 Local preview: `aem up` → typically `http://localhost:3000` (see [AGENTS.md](./AGENTS.md)).
 
 ### `fstab.yaml` alignment
 
-Mountpoints must use your org’s **Franklin delivery** URL (Code Sync), not the browser `/content/...` path. If preview or sync fails, confirm `mountpoints./.url` matches `https://<author-host>/bin/franklin.delivery/gabrielwalt/kv/<branch>` (or your team’s equivalent). The checked-in file may still reflect boilerplate; update it when wiring this repo to the Author instance above.
+Mountpoints must use your org’s **Franklin delivery** URL (Code Sync), not the browser `/content/...` path. If preview or sync fails, confirm `mountpoints./.url` matches `https://<author-host>/bin/franklin.delivery/gabrielwalt/koffie/<branch>` (or your team’s equivalent). The checked-in file may still reflect boilerplate; update it when wiring this repo to the Author instance above.
 
 | Field | Value |
 |--------|--------|
 | **Source site** | [https://www.koffievoordeel.nl/](https://www.koffievoordeel.nl/) |
 | **Import scope** | Six pages listed under [Migration status](#migration-status) |
-| **Content path prefix** | As modeled under `/content/kv/` in AEM (confirm with your implementation) |
+| **Content path prefix** | As modeled under `/content/koffie/` in AEM (confirm with your implementation) |
 | **Local import output** | Optional `/content/` or `.plain.html` scratch — usually **not** Git-tracked if AEM is system of record |
 
 ---
