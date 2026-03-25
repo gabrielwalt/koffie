@@ -13,14 +13,6 @@ localhost-key.pem
 
 # Generated
 helix-importer-ui
-.migration/project.json
 tools/importer/*.bundle.js
 tools/importer/urls-*.txt
 tools/importer/reports/
-*.html
-
-# Force-track (override above)
-!CLAUDE.md
-!INSTRUCTIONS.md
-!PROJECT.md
-!PAGES.txt
