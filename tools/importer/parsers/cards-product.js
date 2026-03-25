@@ -17,7 +17,7 @@ function createBlockHelper(doc, { name, cells }) {
   }
   const table = doc.createElement('table');
   const headerRow = doc.createElement('tr');
-  const headerCell = doc.createElement('td');
+  const headerCell = doc.createElement('th');
   headerCell.colSpan = 100;
   headerCell.textContent = name;
   headerRow.appendChild(headerCell);
