@@ -1,0 +1,39 @@
+{
+  "variantName": "cards-steps",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-03-25T17:05:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.koffievoordeel.nl/abonnement",
+    "originPage": "subscription landing page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "how-it-works",
+    "imagePattern": "icon"
+  },
+  "contentPattern": {
+    "structure": "icon image + step text",
+    "buttonCount": 0,
+    "imageCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "how-it-works sections",
+      "step-by-step process explanations"
+    ],
+    "notSuitableFor": [
+      "product grids",
+      "content cards with descriptions"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "content/abonnement"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-03-25T17:05:00.000Z"
+  }
+}

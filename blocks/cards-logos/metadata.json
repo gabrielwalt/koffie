@@ -1,0 +1,39 @@
+{
+  "variantName": "cards-logos",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-03-25T17:05:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.koffievoordeel.nl/abonnement",
+    "originPage": "subscription landing page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "brand-logos",
+    "imagePattern": "icon"
+  },
+  "contentPattern": {
+    "structure": "brand logo images only",
+    "buttonCount": 0,
+    "imageCount": 6
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "brand logo displays",
+      "partner logo rows"
+    ],
+    "notSuitableFor": [
+      "content cards",
+      "product grids"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "content/abonnement"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-03-25T17:05:00.000Z"
+  }
+}

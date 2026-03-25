@@ -106,11 +106,13 @@ scripts/
   dompurify.min.js
 
 tools/importer/                    # optional
-  import.js
-  import.bundle.js                 # COMPILED
-  urls.txt
-  parsers/
-  transformers/
+  page-templates.json              # template definitions with block selectors and sections
+  import-<template>.js             # per-template import script
+  import-<template>.bundle.js      # COMPILED (bundled for browser execution)
+  urls-<template>.txt              # URL lists per template
+  parsers/                         # one parser per block variant
+  transformers/                    # site-wide DOM cleanup + section breaks
+  reports/                         # import reports (JSON + Excel)
 
 fstab.yaml
 head.html                          # CSP / UE nonce requirements as per your setup
@@ -265,14 +267,40 @@ export default function decorate(block) {
 
 Typical **transformer order**:
 
-1. `beforeTransform` — cleanup, synthetic wrappers, **section** `hr` + metadata (often must run **before** parsers destroy wrapper nodes).
+1. `beforeTransform` — cleanup, synthetic wrappers.
 2. Parsers — replace matched regions with block tables.
-3. `afterTransform` — chrome removal, placeholder conversion, etc.
+3. `afterTransform` — section `hr` + section-metadata, chrome removal, placeholder conversion.
 4. Built-in importer rules (metadata, URLs, backgrounds).
+
+### Parser validation — matched element must be replaced
+
+**Critical**: The parser validator tracks what happens to the **matched element** (`element` argument). Parsers **must** call `element.replaceWith(block)`. If a parser navigates to a parent/container and calls `container.replaceWith(block)` instead, the validator sees the matched element as untransformed — it shows raw HTML even though the parser “worked”.
+
+**Pattern for multi-element parsers** (e.g. multiple columns in a row that form one block):
+
+```javascript
+export default function parse(element, { document }) {
+  if (!element.parentElement) return;            // guard: already processed
+  const container = element.closest(‘.parent’);   // find siblings
+  const siblings = [...container.querySelectorAll(‘.item’)];
+  // ... build cells from all siblings ...
+  const block = createBlockHelper(document, { name: ‘block-name’, cells });
+  siblings.forEach(sib => { if (sib !== element && sib.parentElement) sib.remove(); });
+  element.replaceWith(block);                    // ← always replace the matched element
+}
+```
+
+### Magento / RequireJS sites — UMD module interference
+
+Magento (and other RequireJS-based sites) define `exports`, `module`, and `define` as globals. The helix-importer UMD wrapper detects these and exports to `module.exports` instead of `globalThis.WebImporter`.
+
+**Fix for bulk import** (`run-bulk-import.js`): Wrap the helix-importer script in an IIFE that shadows `exports`, `module`, and `define` as `undefined`, forcing the UMD fallback path to `globalThis.WebImporter`. Add a recovery step that checks `module.exports` in case the wrapping didn’t fully isolate.
+
+**Fix for parser validator hooks**: Apply the same shadowing + recovery pattern in `playwright-helpers.js` and the static `import.js` used by the hook.
 
 ### Section metadata placement
 
-A robust approach: insert section breaks first, then attach metadata to the correct section (often at the **end** of each section’s wrapper, before the next break). Adapt to **your** DOM.
+A robust approach: insert section breaks in `afterTransform` (after parsers run), then attach metadata to the correct section. Adapt to **your** DOM.
 
 ### Heading markup
 
@@ -294,13 +322,27 @@ When two selectors could match the same node, **registration order** matters. Do
 
 If the source uses `<button>` without navigation and your target format expects links, document how parsers normalize that (e.g. `href` placeholders).
 
-### Bundle command (example)
+### Selector debugging — always verify on the live page
+
+CSS selectors identified from static/cleaned HTML **often differ** from the live page DOM:
+
+- Magento’s pagebuilder injects JS-rendered widgets (`[data-collapsible]`, `[role=”tablist”]`).
+- Pseudo-selectors like `:first-of-type` can break when the live DOM has extra wrapper divs.
+- Always verify selectors with `document.querySelectorAll(selector).length` on the live page via Playwright before writing parsers.
+
+### Template-specific import scripts
+
+Each template gets its own import script: `tools/importer/import-<templateName>.js` → bundled to `.bundle.js`. Never use a generic `import.js`. The bundled file is what runs in `run-bulk-import.js`.
+
+### Bundle command
+
+Use the `aem-import-bundle.sh` script from the content-import skill, or manually:
 
 ```bash
-npx esbuild tools/importer/import.js --bundle --format=iife --global-name=CustomImportScript --outfile=tools/importer/import.bundle.js
+npx esbuild tools/importer/import-<template>.js --bundle --format=iife --global-name=CustomImportScript --outfile=tools/importer/import-<template>.bundle.js
 ```
 
-Run your project’s bulk-import or single-page import command against `import.bundle.js` and your URL list. **Do not** hand-edit `import.bundle.js`.
+Run your project’s bulk-import against `import-<template>.bundle.js` and your URL list. **Do not** hand-edit `.bundle.js`.
 
 ---
 
@@ -325,4 +367,7 @@ Replace `KEYWORD` with your topic.
 | `scripts/scripts.js` | `moveInstrumentation`, helpers |
 | `scripts/editor-support.js` | UE runtime — change rarely |
 | `fstab.yaml` | Content mount |
-| `tools/importer/import.js` | Importer entry (if used) |
+| `tools/importer/page-templates.json` | Template definitions with block selectors and sections |
+| `tools/importer/import-*.js` | Per-template import scripts |
+| `tools/importer/parsers/*.js` | Block parsers (one per variant) |
+| `tools/importer/transformers/*.js` | Site-wide DOM cleanup and section transformers |

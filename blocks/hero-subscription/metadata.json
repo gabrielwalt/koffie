@@ -1,0 +1,39 @@
+{
+  "variantName": "hero-subscription",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-03-25T17:05:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.koffievoordeel.nl/abonnement",
+    "originPage": "subscription landing page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "subscription-hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + heading + subtitle + benefit list + CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "subscription landing pages",
+      "promotional pages with hero image and benefits"
+    ],
+    "notSuitableFor": [
+      "minimal text-only heroes",
+      "dark background heroes"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "content/abonnement"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-03-25T17:05:00.000Z"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "variantName": "cards-product",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-03-25T17:05:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.koffievoordeel.nl/abonnement",
+    "originPage": "subscription landing page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "product",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "product image + name + description + pricing + CTA",
+    "buttonCount": 3,
+    "imageCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "product listing grids",
+      "featured product sections"
+    ],
+    "notSuitableFor": [
+      "icon grids",
+      "logo displays"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "content/abonnement"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-03-25T17:05:00.000Z"
+  }
+}

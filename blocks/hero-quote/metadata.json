@@ -1,0 +1,39 @@
+{
+  "variantName": "hero-quote",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-03-25T17:05:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.koffievoordeel.nl/abonnement",
+    "originPage": "subscription landing page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "grey",
+    "density": "minimal",
+    "purpose": "quote-banner",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "background image + quote text",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "quote banners with background images",
+      "testimonial sections"
+    ],
+    "notSuitableFor": [
+      "text-only quotes",
+      "attributed quotes with author"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "content/abonnement"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-03-25T17:05:00.000Z"
+  }
+}
