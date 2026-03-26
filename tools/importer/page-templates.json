@@ -311,7 +311,7 @@
           "selector": ".header-banner-illy",
           "style": "brand-hero",
           "blocks": [
-            "hero-italia",
+            "hero (italia)",
             "hero"
           ],
           "defaultContent": []

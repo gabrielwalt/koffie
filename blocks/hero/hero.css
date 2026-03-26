@@ -54,6 +54,37 @@
   display: block;
 }
 
+/* Italia variant: Italian flag ribbon (green-white-red) at the bottom */
+.hero.italia {
+  min-height: 143px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a1a;
+  padding: 20px;
+}
+
+.hero.italia picture {
+  position: static;
+  max-width: 300px;
+}
+
+.hero.italia img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.hero.italia::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(to right, #82bb6a 33.33%, #fff 33.33%, #fff 66.66%, #fc0009 66.66%);
+}
+
 @media (width >= 900px) {
   .hero {
     padding: 40px 32px;

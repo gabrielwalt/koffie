@@ -254,7 +254,7 @@ const PAGE_HOOKS = {
 
     /**
      * Handle dual heroes for the GMI experience page.
-     * First hero → hero-italia (logo over dark bg with flag ribbon).
+     * First hero → hero (italia) (logo over dark bg with flag ribbon).
      * Second hero → hero (landscape bg-image with styled heading).
      */
     beforeParsing(document, pageBlocks, payload) {
@@ -262,7 +262,7 @@ const PAGE_HOOKS = {
       const heroBlocks = pageBlocks.filter((b) => b.name === 'hero');
       if (heroBlocks.length < 2) return;
 
-      // --- First hero → hero-italia ---
+      // --- First hero → hero (italia) ---
       const firstEl = heroBlocks[0].element;
       const firstImg = firstEl.querySelector('picture img, figure img, .image-wrapper img, img');
       const firstCells = [];
@@ -275,7 +275,7 @@ const PAGE_HOOKS = {
       const emptyText = document.createDocumentFragment();
       emptyText.appendChild(document.createComment(' field:text '));
       firstCells.push([emptyText]);
-      const heroItaliaTable = createBlockTable(document, 'hero-italia', firstCells);
+      const heroItaliaTable = createBlockTable(document, 'Hero (italia)', firstCells);
       firstEl.replaceWith(heroItaliaTable);
 
       // --- Second hero → hero (with background image + styled heading) ---
