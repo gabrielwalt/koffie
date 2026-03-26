@@ -206,6 +206,11 @@ a:hover {
   text-decoration: underline;
 }
 
+/* underline links in default content */
+main .default-content-wrapper a:any-link {
+  text-decoration: underline;
+}
+
 /* buttons */
 a.button:any-link,
 button {
@@ -315,6 +320,18 @@ main .section.beige .default-content-wrapper > p:first-child:has(+ h2) {
   letter-spacing: 0.1em;
   color: var(--text-muted-color, #8f9090);
   margin-bottom: 0;
+}
+
+/* Italia section style: Italian flag ribbon at the bottom */
+main .section.italia {
+  position: relative;
+}
+
+main .section.italia::after {
+  content: '';
+  display: block;
+  height: 6px;
+  background: linear-gradient(to right, #82bb6a 33.33%, #fff 33.33%, #fff 66.66%, #fc0009 66.66%);
 }
 
 main .section.dark {

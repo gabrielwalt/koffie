@@ -60,6 +60,12 @@ export default function transform(hookName, element, payload) {
       '.cookie-consent-dialog',
     ]);
 
+    // Trustpilot widget (site-wide badge at the bottom of content pages)
+    removeSelectors(element, [
+      '.trustpilot-widget-default',
+      '[class*="tp-widget"]',
+    ]);
+
     // Breadcrumbs (hidden by CSS on source page but still in DOM)
     removeSelectors(element, ['.breadcrumbs']);
 

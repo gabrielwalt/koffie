@@ -390,7 +390,7 @@
           "name": "Discover GMI World",
           "selector": ".slick-slider",
           "headingMatch": "Ontdek de wereld",
-          "style": null,
+          "style": "beige, italia",
           "blocks": [
             "cards"
           ],
