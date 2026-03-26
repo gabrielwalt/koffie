@@ -175,7 +175,8 @@ pre {
 }
 
 main > div {
-  margin: var(--spacing-xl) var(--section-gutter);
+  margin: 0;
+  padding: var(--spacing-xl) var(--section-gutter);
 }
 
 input,
@@ -278,7 +279,8 @@ main img {
 
 /* sections */
 main > .section {
-  margin: var(--spacing-xl) 0;
+  margin: 0;
+  padding: var(--spacing-xl) 0;
 }
 
 main > .section > div {
@@ -287,35 +289,19 @@ main > .section > div {
   padding: 0 var(--section-gutter);
 }
 
-main > .section:first-of-type {
-  margin-top: 0;
-}
-
-@media (width >= 900px) {
-  main > .section > div {
-    padding: 0 var(--section-gutter);
-  }
-}
-
 /* section metadata */
 main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
-  margin: 0;
-  padding: var(--spacing-xl) 0;
 }
 
 main .section.beige {
   background-color: #f5f0eb;
-  margin: 0;
-  padding: var(--spacing-xl) 0;
 }
 
 main .section.dark {
   background-color: var(--dark-color, #2b2b2b);
   color: #fff;
-  margin: 0;
-  padding: var(--spacing-xl) 0;
 }
 
 main .section.dark h1,

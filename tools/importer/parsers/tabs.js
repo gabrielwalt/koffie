@@ -150,6 +150,14 @@ export default function parse(element, { document }) {
 
   const frag = document.createDocumentFragment();
 
+  // Emit the tabs title heading (e.g. "Populair bij abonnees") if present
+  const tabsTitle = element.querySelector('.tabs-title');
+  if (tabsTitle) {
+    const h2 = document.createElement('h2');
+    h2.textContent = tabsTitle.textContent.trim();
+    frag.appendChild(h2);
+  }
+
   // Output each tab panel as its own section
   tabPanels.forEach((panel, i) => {
     const tabHeader = tabHeaders[i];

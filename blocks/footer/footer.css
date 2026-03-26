@@ -1,6 +1,6 @@
 /*
  * Footer Block
- * 4-column footer with category links + bottom legal bar
+ * USP bar + 4-column category links + bottom legal bar
  * Matches koffievoordeel.nl footer
  */
 
@@ -18,12 +18,45 @@ footer .footer p {
   margin: 0;
 }
 
-/* main footer section — category columns */
+/* USP bar section */
 footer .footer .section:first-child {
+  background-color: var(--dark-color, #2b2b2b);
+  padding: 16px 24px;
+}
+
+footer .footer .section:first-child .default-content-wrapper ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px 32px;
+}
+
+footer .footer .section:first-child .default-content-wrapper ul li a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+footer .footer .section:first-child .default-content-wrapper ul li img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* main footer section — category columns */
+footer .footer .section:nth-child(2) {
   padding: 40px 24px 24px;
 }
 
-footer .footer .section:first-child .default-content-wrapper p strong {
+footer .footer .section:nth-child(2) .default-content-wrapper p strong {
   display: block;
   font-family: var(--heading-font-family);
   font-size: var(--heading-font-size-l);
@@ -33,18 +66,18 @@ footer .footer .section:first-child .default-content-wrapper p strong {
   margin-top: 0;
 }
 
-footer .footer .section:first-child .default-content-wrapper ul {
+footer .footer .section:nth-child(2) .default-content-wrapper ul {
   list-style: none;
   padding: 0;
   margin: 0 0 24px;
   display: block;
 }
 
-footer .footer .section:first-child .default-content-wrapper ul li {
+footer .footer .section:nth-child(2) .default-content-wrapper ul li {
   padding: 4px 0;
 }
 
-footer .footer .section:first-child .default-content-wrapper ul li a {
+footer .footer .section:nth-child(2) .default-content-wrapper ul li a {
   color: var(--text-color);
   font-size: var(--body-font-size-s);
   text-decoration: none;
@@ -73,35 +106,36 @@ footer .footer .section:last-child .default-content-wrapper ul li a {
   text-decoration: none;
 }
 
-/* hover states for all footer links */
+/* hover states for footer links */
 footer .footer .section:first-child .default-content-wrapper ul li a:hover,
+footer .footer .section:nth-child(2) .default-content-wrapper ul li a:hover,
 footer .footer .section:last-child .default-content-wrapper ul li a:hover {
   text-decoration: underline;
 }
 
 @media (width >= 900px) {
-  footer .footer .section:first-child {
+  footer .footer .section:nth-child(2) {
     padding: 40px 32px 24px;
   }
 
   /* 4-column grid using CSS columns */
-  footer .footer .section:first-child .default-content-wrapper {
+  footer .footer .section:nth-child(2) .default-content-wrapper {
     column-count: 4;
     column-gap: 32px;
   }
 
   /* keep heading + list together in same column */
-  footer .footer .section:first-child .default-content-wrapper p {
+  footer .footer .section:nth-child(2) .default-content-wrapper p {
     break-inside: avoid;
     break-after: avoid;
   }
 
-  footer .footer .section:first-child .default-content-wrapper ul {
+  footer .footer .section:nth-child(2) .default-content-wrapper ul {
     break-inside: avoid;
     break-before: avoid;
   }
 
-  footer .footer .section:first-child .default-content-wrapper p strong {
+  footer .footer .section:nth-child(2) .default-content-wrapper p strong {
     font-size: 22px;
   }
 
