@@ -126,3 +126,40 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* Fallback: undecorated cards-product tables (when block decoration fails) */
+main table:has(th:only-child) {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+main table:has(th:only-child) > thead {
+  display: none;
+}
+
+main table:has(th:only-child) > tbody > tr {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 16px 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+main table:has(th:only-child) > tbody > tr > td:first-child img {
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+}
+
+main table:has(th:only-child) > tbody > tr > td:last-child h3 {
+  margin-top: 0;
+  font-size: var(--heading-font-size-m);
+}
+
+main table:has(th:only-child) > tbody > tr > td:last-child a.button:any-link {
+  font-size: var(--body-font-size-s);
+  padding: 10px 16px;
+  height: auto;
+}

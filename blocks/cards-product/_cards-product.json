@@ -39,14 +39,16 @@
           "component": "reference",
           "valueType": "string",
           "name": "image",
-          "label": "Image",
+          "label": "Product Image",
+          "description": "Product photo displayed on this card.",
           "multi": false
         },
         {
           "component": "richtext",
           "name": "text",
           "value": "",
-          "label": "Text",
+          "label": "Product Details",
+          "description": "Product name, intensity rating, description, pricing, and CTA link.",
           "valueType": "string"
         }
       ]

@@ -46,6 +46,7 @@
           "component": "multiselect",
           "name": "style",
           "label": "Style",
+          "description": "Visual style applied to this section. Multiple styles can be combined.",
           "options": [
             {
               "name": "Highlight",
@@ -54,6 +55,14 @@
             {
               "name": "Beige",
               "value": "beige"
+            },
+            {
+              "name": "Dark",
+              "value": "dark"
+            },
+            {
+              "name": "Brand Hero",
+              "value": "brand-hero"
             }
           ]
         }
@@ -67,6 +76,8 @@
           "name": "tabTitle",
           "value": "",
           "label": "Tab Title",
+          "description": "Label displayed on the tab navigation button.",
+          "placeholder": "e.g. Koffiebonen",
           "valueType": "string"
         },
         {
@@ -79,6 +90,7 @@
           "component": "multiselect",
           "name": "style",
           "label": "Style",
+          "description": "Visual style applied to this section. Multiple styles can be combined.",
           "options": [
             {
               "name": "Highlight",
@@ -87,6 +99,14 @@
             {
               "name": "Beige",
               "value": "beige"
+            },
+            {
+              "name": "Dark",
+              "value": "dark"
+            },
+            {
+              "name": "Brand Hero",
+              "value": "brand-hero"
             }
           ]
         }
@@ -102,15 +122,17 @@
         "button",
         "title",
         "hero",
+        "hero-quote",
+        "hero-subscription",
         "cards",
         "cards-category",
         "cards-product",
         "cards-steps",
         "columns",
         "fragment",
-        "hero-subscription",
         "accordion-faq",
-        "banner"
+        "banner",
+        "embed"
       ]
     }
   ]

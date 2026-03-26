@@ -14,15 +14,17 @@
       "button",
       "title",
       "hero",
+      "hero-quote",
+      "hero-subscription",
       "cards",
       "cards-category",
       "cards-product",
       "cards-steps",
       "columns",
       "fragment",
-      "hero-subscription",
       "accordion-faq",
-      "banner"
+      "banner",
+      "embed"
     ]
   },
   {

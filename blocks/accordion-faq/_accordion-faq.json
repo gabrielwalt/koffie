@@ -42,13 +42,15 @@
           "valueType": "string",
           "name": "summary",
           "value": "",
-          "label": "Summary"
+          "label": "Question",
+          "description": "The FAQ question shown as the clickable accordion header."
         },
         {
           "component": "richtext",
           "name": "text",
           "value": "",
-          "label": "Text",
+          "label": "Answer",
+          "description": "The FAQ answer revealed when the accordion item is expanded.",
           "valueType": "string"
         }
       ]

@@ -39,7 +39,8 @@
         {
           "component": "select",
           "name": "classes",
-          "label": "Style",
+          "label": "Card Layout Style",
+          "description": "Choose 'Default' for category icons or 'Brands' for brand logo grid.",
           "valueType": "string",
           "options": [
             { "name": "Default", "value": "" },
@@ -55,14 +56,16 @@
           "component": "reference",
           "valueType": "string",
           "name": "image",
-          "label": "Image",
+          "label": "Category Image",
+          "description": "Icon or logo image for this category card.",
           "multi": false
         },
         {
           "component": "richtext",
           "name": "text",
           "value": "",
-          "label": "Text",
+          "label": "Category Text",
+          "description": "Category name and link displayed below the image.",
           "valueType": "string"
         }
       ]

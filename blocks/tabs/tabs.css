@@ -60,3 +60,40 @@
 .tabs .tabs-panel[aria-hidden='true'] {
   display: none;
 }
+
+/* "Bekijk alle" link — right-aligned red text link with arrow */
+.tabs .tabs-panel > div > .button-container {
+  text-align: right;
+  margin-bottom: 16px;
+}
+
+.tabs .tabs-panel > div > .button-container a.button:any-link {
+  display: inline;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--accent-color);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  white-space: normal;
+  text-decoration: none;
+}
+
+.tabs .tabs-panel > div > .button-container a.button::after {
+  content: ' \2192';
+}
+
+.tabs .tabs-panel > div > .button-container a.button:hover {
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+/* Product cards inside tabs: add card borders */
+.tabs .tabs-panel .cards-product > ul > li {
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  overflow: hidden;
+}

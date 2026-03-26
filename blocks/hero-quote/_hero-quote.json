@@ -24,21 +24,25 @@
           "component": "reference",
           "valueType": "string",
           "name": "image",
-          "label": "Image",
+          "label": "Quote Background Image",
+          "description": "Background image displayed behind the quote.",
           "multi": false
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "imageAlt",
-          "label": "Alt",
+          "label": "Image Alt Text",
+          "description": "Accessible description of the background image.",
+          "placeholder": "Describe the image content",
           "value": ""
         },
         {
           "component": "richtext",
           "name": "text",
           "value": "",
-          "label": "Text",
+          "label": "Quote Content",
+          "description": "The quote text and attribution displayed over the background image.",
           "valueType": "string"
         }
       ]

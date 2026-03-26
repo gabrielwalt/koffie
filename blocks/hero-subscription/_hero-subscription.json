@@ -24,21 +24,25 @@
           "component": "reference",
           "valueType": "string",
           "name": "image",
-          "label": "Image",
+          "label": "Subscription Hero Image",
+          "description": "Background image for the subscription hero section.",
           "multi": false
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "imageAlt",
-          "label": "Alt",
+          "label": "Image Alt Text",
+          "description": "Accessible description of the hero image.",
+          "placeholder": "Describe the image content",
           "value": ""
         },
         {
           "component": "richtext",
           "name": "text",
           "value": "",
-          "label": "Text",
+          "label": "Subscription Content",
+          "description": "Heading, feature list, and call-to-action for the subscription section.",
           "valueType": "string"
         }
       ]

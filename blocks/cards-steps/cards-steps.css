@@ -4,6 +4,13 @@
  * 3 cards: number, icon, label — bordered with centered content
  */
 
+/* Section background for cards-steps */
+main .section.cards-steps-container {
+  background-color: var(--light-color);
+  margin: 0;
+  padding: var(--spacing-xl) 0;
+}
+
 .cards-steps > ul {
   list-style: none;
   margin: 0;
@@ -23,6 +30,15 @@
   padding: 24px 16px 20px;
   flex: 1 1 140px;
   min-width: 0;
+}
+
+/* Step number badge */
+.cards-steps .cards-steps-badge {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 8px;
 }
 
 /* image container */

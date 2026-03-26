@@ -1,6 +1,24 @@
 // eslint-disable-next-line import/no-unresolved
-import { toClassName } from '../../scripts/aem.js';
+import { toClassName, loadCSS } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
+
+async function decorateAndLoadNestedBlock(nestedBlock) {
+  const blockName = nestedBlock.classList[0];
+  if (!blockName || nestedBlock.dataset.blockStatus) return;
+  nestedBlock.classList.add('block');
+  nestedBlock.dataset.blockName = blockName;
+  nestedBlock.dataset.blockStatus = 'loading';
+  try {
+    const cssLoaded = loadCSS(`${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`);
+    const mod = await import(`${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`);
+    if (mod.default) await mod.default(nestedBlock);
+    await cssLoaded;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(`failed to load nested block ${blockName}`, error);
+  }
+  nestedBlock.dataset.blockStatus = 'loaded';
+}
 
 export default async function decorate(block) {
   // build tablist
@@ -50,4 +68,9 @@ export default async function decorate(block) {
   });
 
   block.prepend(tablist);
+
+  // decorate nested blocks inside tab panels
+  const nestedBlocks = block.querySelectorAll('[class]:not(.tabs-list):not(.tabs-tab):not(.tabs-panel)');
+  const innerBlocks = [...nestedBlocks].filter((el) => el.tagName === 'DIV' && el.classList.length === 1 && !el.dataset.blockStatus);
+  await Promise.all(innerBlocks.map(decorateAndLoadNestedBlock));
 }

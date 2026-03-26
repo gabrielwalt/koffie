@@ -310,3 +310,78 @@ main .section.beige {
   margin: 0;
   padding: var(--spacing-xl) 0;
 }
+
+main .section.dark {
+  background-color: var(--dark-color, #2b2b2b);
+  color: #fff;
+  margin: 0;
+  padding: var(--spacing-xl) 0;
+}
+
+main .section.dark h1,
+main .section.dark h2,
+main .section.dark h3,
+main .section.dark h4,
+main .section.dark h5,
+main .section.dark h6 {
+  color: #fff;
+}
+
+main .section.dark a:any-link {
+  color: #fff;
+  text-decoration: underline;
+}
+
+main .section.dark a:hover {
+  color: rgb(255 255 255 / 80%);
+}
+
+main .section.brand-hero {
+  margin: 0;
+  padding: 0;
+}
+
+/* hide section-metadata wrapper (processed by aem.js) */
+main .section-metadata {
+  display: none;
+}
+
+/* hide unprocessed EDS block tables that contain no images (metadata-like) */
+main table:has(th:only-child):not(:has(tbody img)) {
+  display: none;
+}
+
+/* horizontal rules between sections */
+main hr {
+  border: none;
+  border-top: 1px solid #dadada;
+  margin: var(--spacing-xl) 0;
+}
+
+/* constrain SVG icons in default content lists */
+main .default-content-wrapper ul img[src$=".svg"],
+main .default-content-wrapper ol img[src$=".svg"] {
+  max-height: 48px;
+  width: auto;
+}
+
+/* strikethrough price styling in default content */
+main .default-content-wrapper del,
+main .default-content-wrapper s {
+  color: var(--text-muted-color);
+  font-size: var(--body-font-size-s);
+  margin-right: 6px;
+}
+
+/* hide consecutive duplicate images in default content (import artifact) */
+main .default-content-wrapper p > img + img {
+  display: none;
+}
+
+/* Trustpilot-style widget at bottom */
+main .section:last-of-type .default-content-wrapper img[src*="trustpilot"],
+main .section:last-of-type .default-content-wrapper img[alt*="Trustpilot"],
+main .section:last-of-type .default-content-wrapper img[alt*="trustpilot"] {
+  max-width: 200px;
+  height: auto;
+}

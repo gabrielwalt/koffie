@@ -132,6 +132,7 @@
         "component": "multiselect",
         "name": "style",
         "label": "Style",
+        "description": "Visual style applied to this section. Multiple styles can be combined.",
         "options": [
           {
             "name": "Highlight",
@@ -140,6 +141,14 @@
           {
             "name": "Beige",
             "value": "beige"
+          },
+          {
+            "name": "Dark",
+            "value": "dark"
+          },
+          {
+            "name": "Brand Hero",
+            "value": "brand-hero"
           }
         ]
       }
@@ -153,6 +162,8 @@
         "name": "tabTitle",
         "value": "",
         "label": "Tab Title",
+        "description": "Label displayed on the tab navigation button.",
+        "placeholder": "e.g. Koffiebonen",
         "valueType": "string"
       },
       {
@@ -165,6 +176,7 @@
         "component": "multiselect",
         "name": "style",
         "label": "Style",
+        "description": "Visual style applied to this section. Multiple styles can be combined.",
         "options": [
           {
             "name": "Highlight",
@@ -173,6 +185,14 @@
           {
             "name": "Beige",
             "value": "beige"
+          },
+          {
+            "name": "Dark",
+            "value": "dark"
+          },
+          {
+            "name": "Brand Hero",
+            "value": "brand-hero"
           }
         ]
       }
@@ -186,13 +206,15 @@
         "valueType": "string",
         "name": "summary",
         "value": "",
-        "label": "Summary"
+        "label": "Question",
+        "description": "The FAQ question shown as the clickable accordion header."
       },
       {
         "component": "richtext",
         "name": "text",
         "value": "",
-        "label": "Text",
+        "label": "Answer",
+        "description": "The FAQ answer revealed when the accordion item is expanded.",
         "valueType": "string"
       }
     ]
@@ -204,28 +226,34 @@
         "component": "reference",
         "valueType": "string",
         "name": "imageDesktop",
-        "label": "Desktop Image",
+        "label": "Desktop Banner Image",
+        "description": "Banner image shown on desktop screens.",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "imageDesktopAlt",
-        "label": "Desktop Alt",
+        "label": "Desktop Image Alt Text",
+        "description": "Accessible description of the desktop banner image.",
+        "placeholder": "Describe the banner content",
         "value": ""
       },
       {
         "component": "reference",
         "valueType": "string",
         "name": "imageMobile",
-        "label": "Mobile Image",
+        "label": "Mobile Banner Image",
+        "description": "Banner image shown on mobile screens.",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "imageMobileAlt",
-        "label": "Mobile Alt",
+        "label": "Mobile Image Alt Text",
+        "description": "Accessible description of the mobile banner image.",
+        "placeholder": "Describe the mobile banner content",
         "value": ""
       }
     ]
@@ -236,7 +264,8 @@
       {
         "component": "select",
         "name": "classes",
-        "label": "Style",
+        "label": "Card Layout Style",
+        "description": "Choose 'Default' for category icons or 'Brands' for brand logo grid.",
         "valueType": "string",
         "options": [
           {
@@ -258,14 +287,16 @@
         "component": "reference",
         "valueType": "string",
         "name": "image",
-        "label": "Image",
+        "label": "Category Image",
+        "description": "Icon or logo image for this category card.",
         "multi": false
       },
       {
         "component": "richtext",
         "name": "text",
         "value": "",
-        "label": "Text",
+        "label": "Category Text",
+        "description": "Category name and link displayed below the image.",
         "valueType": "string"
       }
     ]
@@ -277,14 +308,16 @@
         "component": "reference",
         "valueType": "string",
         "name": "image",
-        "label": "Image",
+        "label": "Product Image",
+        "description": "Product photo displayed on this card.",
         "multi": false
       },
       {
         "component": "richtext",
         "name": "text",
         "value": "",
-        "label": "Text",
+        "label": "Product Details",
+        "description": "Product name, intensity rating, description, pricing, and CTA link.",
         "valueType": "string"
       }
     ]
@@ -296,14 +329,16 @@
         "component": "reference",
         "valueType": "string",
         "name": "image",
-        "label": "Image",
+        "label": "Step Icon",
+        "description": "Icon or illustration representing this step.",
         "multi": false
       },
       {
         "component": "richtext",
         "name": "text",
         "value": "",
-        "label": "Text",
+        "label": "Step Description",
+        "description": "Step title and explanation text.",
         "valueType": "string"
       }
     ]
@@ -315,14 +350,16 @@
         "component": "reference",
         "valueType": "string",
         "name": "image",
-        "label": "Image",
+        "label": "Card Image",
+        "description": "Featured image for this card.",
         "multi": false
       },
       {
         "component": "richtext",
         "name": "text",
         "value": "",
-        "label": "Text",
+        "label": "Card Content",
+        "description": "Card title, description, and optional link.",
         "valueType": "string"
       }
     ]
@@ -335,14 +372,37 @@
         "valueType": "number",
         "name": "columns",
         "value": "",
-        "label": "Columns"
+        "label": "Number of Columns",
+        "description": "How many columns in the layout (e.g. 2, 3, or 4).",
+        "placeholder": "2"
       },
       {
         "component": "text",
         "valueType": "number",
         "name": "rows",
         "value": "",
-        "label": "Rows"
+        "label": "Number of Rows",
+        "description": "How many rows in the layout.",
+        "placeholder": "1"
+      }
+    ]
+  },
+  {
+    "id": "embed",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Video or Embed URL",
+        "description": "Full URL of the video or post to embed (YouTube, Vimeo, Twitter/X)."
+      },
+      {
+        "component": "text",
+        "name": "linkText",
+        "label": "Link Text",
+        "description": "Display text for the embed link (typically same as the URL).",
+        "placeholder": "https://vimeo.com/838695939",
+        "valueType": "string"
       }
     ]
   },
@@ -352,7 +412,8 @@
       {
         "component": "aem-content",
         "name": "reference",
-        "label": "Reference"
+        "label": "Fragment Reference",
+        "description": "Select an AEM content fragment to embed at this location."
       }
     ]
   },
@@ -363,21 +424,25 @@
         "component": "reference",
         "valueType": "string",
         "name": "image",
-        "label": "Image",
+        "label": "Quote Background Image",
+        "description": "Background image displayed behind the quote.",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "imageAlt",
-        "label": "Alt",
+        "label": "Image Alt Text",
+        "description": "Accessible description of the background image.",
+        "placeholder": "Describe the image content",
         "value": ""
       },
       {
         "component": "richtext",
         "name": "text",
         "value": "",
-        "label": "Text",
+        "label": "Quote Content",
+        "description": "The quote text and attribution displayed over the background image.",
         "valueType": "string"
       }
     ]
@@ -389,21 +454,25 @@
         "component": "reference",
         "valueType": "string",
         "name": "image",
-        "label": "Image",
+        "label": "Subscription Hero Image",
+        "description": "Background image for the subscription hero section.",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "imageAlt",
-        "label": "Alt",
+        "label": "Image Alt Text",
+        "description": "Accessible description of the hero image.",
+        "placeholder": "Describe the image content",
         "value": ""
       },
       {
         "component": "richtext",
         "name": "text",
         "value": "",
-        "label": "Text",
+        "label": "Subscription Content",
+        "description": "Heading, feature list, and call-to-action for the subscription section.",
         "valueType": "string"
       }
     ]
@@ -415,21 +484,25 @@
         "component": "reference",
         "valueType": "string",
         "name": "image",
-        "label": "Image",
+        "label": "Hero Image",
+        "description": "Main background image for the hero section.",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "imageAlt",
-        "label": "Alt",
+        "label": "Image Alt Text",
+        "description": "Accessible description of the hero image for screen readers.",
+        "placeholder": "Describe the image content",
         "value": ""
       },
       {
         "component": "richtext",
         "name": "text",
         "value": "",
-        "label": "Text",
+        "label": "Hero Content",
+        "description": "Heading, subheading, and call-to-action text displayed over the hero image.",
         "valueType": "string"
       }
     ]

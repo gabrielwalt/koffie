@@ -39,14 +39,16 @@
           "component": "reference",
           "valueType": "string",
           "name": "image",
-          "label": "Image",
+          "label": "Card Image",
+          "description": "Featured image for this card.",
           "multi": false
         },
         {
           "component": "richtext",
           "name": "text",
           "value": "",
-          "label": "Text",
+          "label": "Card Content",
+          "description": "Card title, description, and optional link.",
           "valueType": "string"
         }
       ]

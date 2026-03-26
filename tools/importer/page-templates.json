@@ -65,7 +65,6 @@
           "id": "section-2",
           "name": "How It Works",
           "selector": ".column.main > div:nth-of-type(2)",
-          "headingMatch": "Hoe werkt het",
           "style": null,
           "blocks": [
             "cards-steps"
@@ -78,7 +77,6 @@
           "id": "section-3",
           "name": "Choose Your Coffee",
           "selector": ".column.main > div:nth-of-type(3)",
-          "headingMatch": "Kies je koffie",
           "style": null,
           "blocks": [
             "cards-category",
@@ -93,7 +91,6 @@
           "id": "section-5",
           "name": "Subscription Explanation",
           "selector": "#uitleg",
-          "headingMatch": "Bespaar",
           "style": "beige",
           "blocks": [],
           "defaultContent": []
@@ -102,13 +99,385 @@
           "id": "section-6",
           "name": "FAQ",
           "selector": "#YDF0B3T",
-          "headingMatch": "Veelgestelde vragen",
           "style": null,
           "blocks": [
             "accordion-faq"
           ],
           "defaultContent": [
             "#YDF0B3T"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "content-article",
+      "urls": [
+        "https://www.koffievoordeel.nl/drie-heerlijke-illy-iperespresso-recepten",
+        "https://www.koffievoordeel.nl/terug-in-de-tijd-met-illy"
+      ],
+      "description": "Editorial content page with H1, alternating text and image sections, and optional product recommendations",
+      "blocks": [
+        {
+          "name": "columns",
+          "instances": [
+            ".pagebuilder-column-group"
+          ]
+        },
+        {
+          "name": "cards-product",
+          "instances": [
+            ".widget-product-carousel .product-items"
+          ]
+        },
+        {
+          "name": "tabs",
+          "instances": [
+            ".tab-align-left"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Title and Intro",
+          "selector": ".column.main > div:first-of-type",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "h1",
+            "p"
+          ]
+        },
+        {
+          "id": "section-2",
+          "name": "Recipe Column",
+          "selector": ".column.main .pagebuilder-column-group",
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-5",
+          "name": "Related Products",
+          "selector": ".widget-product-carousel",
+          "style": null,
+          "blocks": [
+            "cards-product"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-6",
+          "name": "Recommendations Tabs",
+          "selector": ".tab-align-left",
+          "style": null,
+          "blocks": [
+            "tabs"
+          ],
+          "defaultContent": [
+            "h2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "instructional-page",
+      "urls": [
+        "https://www.koffievoordeel.nl/abonnement-wijzigen"
+      ],
+      "description": "Instructional support page with hero banner, step-by-step text instructions, and embedded tutorial videos",
+      "blocks": [
+        {
+          "name": "embed",
+          "instances": [
+            ".pagebuilder-video-container iframe[src*='vimeo']"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero Banner",
+          "selector": ".column.main > div:first-of-type",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "p > a > picture"
+          ]
+        },
+        {
+          "id": "section-2",
+          "name": "Introduction",
+          "selector": ".column.main h1",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "h1",
+            "p"
+          ]
+        },
+        {
+          "id": "section-3",
+          "name": "Instruction Step: Datum aanpassen",
+          "selector": ".column.main",
+          "style": null,
+          "blocks": [
+            "embed"
+          ],
+          "defaultContent": [
+            "h2",
+            "ul",
+            "p"
+          ]
+        },
+        {
+          "id": "section-4",
+          "name": "Instruction Step: Aantal stuks aanpassen",
+          "selector": ".column.main",
+          "style": null,
+          "blocks": [
+            "embed"
+          ],
+          "defaultContent": [
+            "h2",
+            "ul"
+          ]
+        },
+        {
+          "id": "section-5",
+          "name": "Instruction Step: Pauzeren, reactiveren en opzeggen",
+          "selector": ".column.main",
+          "style": null,
+          "blocks": [
+            "embed"
+          ],
+          "defaultContent": [
+            "h2",
+            "ul"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "brand-landing",
+      "urls": [
+        "https://www.koffievoordeel.nl/gran-maestro-italiano-experience"
+      ],
+      "description": "Brand experience marketing page with multiple styled sections, alternating text and image layouts, tabbed product carousel, and CTA cards",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [
+            ".header-banner-illy"
+          ]
+        },
+        {
+          "name": "columns",
+          "instances": [
+            ".pagebuilder-column-group"
+          ]
+        },
+        {
+          "name": "tabs",
+          "instances": [
+            ".tab-align-left"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            ".slick-slider"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero Banner",
+          "selector": ".header-banner-illy",
+          "style": "brand-hero",
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Promotional Banner",
+          "selector": ".column.main > div:nth-of-type(2)",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "p > a > picture"
+          ]
+        },
+        {
+          "id": "section-3",
+          "name": "Italian Quality",
+          "selector": ".content-gmi-1",
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-4",
+          "name": "Exclusive at Koffievoordeel",
+          "selector": ".column.main .pagebuilder-column-group:nth-of-type(2)",
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-5",
+          "name": "Over smaak gesproken",
+          "selector": ".column.main > div:nth-of-type(5)",
+          "style": "dark",
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": [
+            "h2"
+          ]
+        },
+        {
+          "id": "section-6",
+          "name": "Product Assortment Tabs",
+          "selector": ".tab-align-left",
+          "style": null,
+          "blocks": [
+            "tabs"
+          ],
+          "defaultContent": [
+            "h2"
+          ]
+        },
+        {
+          "id": "section-7",
+          "name": "Coffee Finder CTA",
+          "selector": ".column.main > div:nth-of-type(7)",
+          "style": "dark",
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-8",
+          "name": "Sustainability",
+          "selector": ".column.main > div:nth-of-type(8)",
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-9",
+          "name": "Discover GMI World",
+          "selector": ".slick-slider",
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "h2",
+            "picture"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "blog-article",
+      "urls": [
+        "https://www.koffievoordeel.nl/blog/de-wetenschap-achter-de-perfecte-kop-koffie"
+      ],
+      "description": "Blog post with author metadata, hero image, long-form editorial content, FAQ accordion, and product recommendations",
+      "blocks": [
+        {
+          "name": "columns",
+          "instances": [
+            ".amblog-content .pagebuilder-column-group"
+          ]
+        },
+        {
+          "name": "cards-product",
+          "instances": [
+            ".widget-product-carousel"
+          ]
+        },
+        {
+          "name": "accordion-faq",
+          "instances": [
+            ".amblog-content dl"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Blog Hero & Intro",
+          "selector": ".amblog-content > div:first-child",
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": [
+            "h1"
+          ]
+        },
+        {
+          "id": "section-2",
+          "name": "Article Body",
+          "selector": ".amblog-content",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "hr",
+            "h3",
+            "p",
+            "ul",
+            "ol"
+          ]
+        },
+        {
+          "id": "section-10",
+          "name": "Product Recommendations",
+          "selector": ".widget-product-carousel",
+          "style": null,
+          "blocks": [
+            "cards-product"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-12",
+          "name": "FAQ",
+          "selector": ".amblog-content dl",
+          "style": null,
+          "blocks": [
+            "accordion-faq"
+          ],
+          "defaultContent": [
+            "h2"
+          ]
+        },
+        {
+          "id": "section-14",
+          "name": "CTA Section",
+          "selector": ".amblog-content > div:last-child",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "h4",
+            "p",
+            "ul",
+            "a.button"
           ]
         }
       ]

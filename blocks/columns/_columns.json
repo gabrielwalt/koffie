@@ -25,14 +25,18 @@
           "valueType": "number",
           "name": "columns",
           "value": "",
-          "label": "Columns"
+          "label": "Number of Columns",
+          "description": "How many columns in the layout (e.g. 2, 3, or 4).",
+          "placeholder": "2"
         },
         {
           "component": "text",
           "valueType": "number",
           "name": "rows",
           "value": "",
-          "label": "Rows"
+          "label": "Number of Rows",
+          "description": "How many rows in the layout.",
+          "placeholder": "1"
         }
       ]
     }

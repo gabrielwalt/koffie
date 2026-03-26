@@ -24,21 +24,25 @@
           "component": "reference",
           "valueType": "string",
           "name": "image",
-          "label": "Image",
+          "label": "Hero Image",
+          "description": "Main background image for the hero section.",
           "multi": false
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "imageAlt",
-          "label": "Alt",
+          "label": "Image Alt Text",
+          "description": "Accessible description of the hero image for screen readers.",
+          "placeholder": "Describe the image content",
           "value": ""
         },
         {
           "component": "richtext",
           "name": "text",
           "value": "",
-          "label": "Text",
+          "label": "Hero Content",
+          "description": "Heading, subheading, and call-to-action text displayed over the hero image.",
           "valueType": "string"
         }
       ]

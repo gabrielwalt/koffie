@@ -24,28 +24,34 @@
           "component": "reference",
           "valueType": "string",
           "name": "imageDesktop",
-          "label": "Desktop Image",
+          "label": "Desktop Banner Image",
+          "description": "Banner image shown on desktop screens.",
           "multi": false
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "imageDesktopAlt",
-          "label": "Desktop Alt",
+          "label": "Desktop Image Alt Text",
+          "description": "Accessible description of the desktop banner image.",
+          "placeholder": "Describe the banner content",
           "value": ""
         },
         {
           "component": "reference",
           "valueType": "string",
           "name": "imageMobile",
-          "label": "Mobile Image",
+          "label": "Mobile Banner Image",
+          "description": "Banner image shown on mobile screens.",
           "multi": false
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "imageMobileAlt",
-          "label": "Mobile Alt",
+          "label": "Mobile Image Alt Text",
+          "description": "Accessible description of the mobile banner image.",
+          "placeholder": "Describe the mobile banner content",
           "value": ""
         }
       ]

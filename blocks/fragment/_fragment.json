@@ -23,7 +23,8 @@
         {
           "component": "aem-content",
           "name": "reference",
-          "label": "Reference"
+          "label": "Fragment Reference",
+          "description": "Select an AEM content fragment to embed at this location."
         }
       ]
     }

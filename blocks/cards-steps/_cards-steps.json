@@ -39,14 +39,16 @@
           "component": "reference",
           "valueType": "string",
           "name": "image",
-          "label": "Image",
+          "label": "Step Icon",
+          "description": "Icon or illustration representing this step.",
           "multi": false
         },
         {
           "component": "richtext",
           "name": "text",
           "value": "",
-          "label": "Text",
+          "label": "Step Description",
+          "description": "Step title and explanation text.",
           "valueType": "string"
         }
       ]
