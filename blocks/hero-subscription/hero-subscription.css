@@ -1,37 +1,110 @@
+/*
+ * Hero Subscription Block
+ * Two-column hero: image left, text content right
+ * Matches koffievoordeel.nl/abonnement hero section
+ */
+
 .hero-subscription-container .hero-subscription-wrapper {
   max-width: unset;
   padding: 0;
 }
 
 .hero-subscription {
-  position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0;
+}
+
+/* Image column */
+.hero-subscription > div:first-child {
+  overflow: hidden;
+  line-height: 0;
+}
+
+.hero-subscription > div:first-child img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Text column */
+.hero-subscription > div:nth-child(2) {
+  padding: 0 var(--section-gutter);
 }
 
 .hero-subscription h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: 8px;
 }
 
-.hero-subscription picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+/* Subtitle quote – red accent like original */
+.hero-subscription em {
+  display: block;
+  font-size: var(--heading-font-size-l);
+  line-height: 1.4;
+  margin-bottom: 16px;
+  color: var(--accent-text-color);
 }
 
-.hero-subscription img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
+/* Benefit items – inner div wraps the benefits */
+.hero-subscription > div:nth-child(2) p {
+  margin-bottom: 8px;
+  font-size: var(--body-font-size-m);
+  line-height: 1.625;
 }
 
+.hero-subscription > div:nth-child(2) p strong {
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* button-container paragraph needs no bottom margin */
+.hero-subscription .button-container {
+  margin-bottom: 0;
+}
+
+/* CTA button */
+.hero-subscription > div:nth-child(2) .button-container {
+  margin-top: 16px;
+}
+
+.hero-subscription a.button:any-link {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.hero-subscription a.button:hover {
+  background-color: var(--accent-hover-color);
+}
+
+/* Desktop: side-by-side */
 @media (width >= 900px) {
   .hero-subscription {
-    padding: 40px 32px;
+    flex-direction: row;
+    align-items: stretch;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+    padding: 10px 0 30px;
+  }
+
+  .hero-subscription > div:first-child {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .hero-subscription > div:first-child img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-subscription > div:nth-child(2) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 32px;
   }
 }

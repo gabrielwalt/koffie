@@ -46,16 +46,36 @@ Mountpoints must use your org’s **Franklin delivery** URL (Code Sync), not the
 
 ## Brand and design tokens
 
-Boilerplate defaults live in `styles/styles.css` until replaced with Koffievoordeel brand values.
+Migrated from koffievoordeel.nl — warm browns, red accents, serif headings.
 
-| Property | Current value | Notes |
-|----------|-----------------|--------|
-| Background | `white` (`--background-color`) | |
-| Text | `#131313` | |
-| Accent / links | `#3b63fb` | |
-| Muted surfaces | `#f8f8f8` (`--light-color`) | Used by section styles below |
-| Body font | Roboto (+ fallback) | `@font-face` fallbacks in `styles/styles.css` |
-| Heading font | Roboto Condensed (+ fallback) | |
+| Token | Value | Notes |
+|-------|-------|-------|
+| `--background-color` | `#fff` | White page background |
+| `--light-color` | `#fbf8f5` | Warm beige surfaces (highlight/beige sections) |
+| `--dark-color` | `#3a3a3a` | Same as text |
+| `--text-color` | `#3a3a3a` | Primary body text |
+| `--text-muted-color` | `#8f9090` | Secondary/muted text |
+| `--link-color` | `#442a18` | Brown links |
+| `--link-hover-color` | `#2e1c10` | Darker brown on hover |
+| `--accent-color` | `#d13a39` | Red CTA buttons |
+| `--accent-hover-color` | `#a82e2e` | Red hover state |
+| `--accent-text-color` | `#e03e2d` | Red emphasis text |
+| `--success-color` | `#37b24d` | Green checkmarks |
+| `--body-font-family` | `roboto, roboto-fallback, sans-serif` | Self-hosted woff2 (400, 500, 700) |
+| `--heading-font-family` | `"Roboto Slab", roboto-slab-fallback, serif` | Google Fonts (400, 700, 900) |
+| `--section-max-width` | `1280px` | Content container max width |
+| `--button-border-radius` | `4px` | All buttons |
+| `--button-height` | `48px` | Standard CTA height |
+
+### Typography scale
+
+| Element | Mobile (<900px) | Desktop (≥900px) |
+|---------|----------------|-----------------|
+| H1 | 35px | 46px |
+| H2 | 28px | 36px |
+| H3 | 22px | 29px |
+| H4 | 18px | 23px |
+| Body | 16px | 16px |
 
 ### Section styles
 
@@ -172,10 +192,12 @@ This creates IIFE format (`var CustomImportScript = ...`) required by `run-bulk-
 
 ## Fonts
 
-| Font | Files / notes |
-|------|----------------|
-| Roboto | `fonts/` (see `styles/styles.css` `@font-face` and variables) |
-| Roboto Condensed | `fonts/` |
+| Font | Source | Weights | Usage |
+|------|--------|---------|-------|
+| Roboto | Self-hosted (`fonts/*.woff2`) | 400, 500, 700 | Body text, buttons |
+| Roboto Slab | Google Fonts (`styles/fonts.css` `@import`) | 400, 700, 900 | Headings |
+
+Font loading: `styles/fonts.css` handles both self-hosted `@font-face` and Google Fonts `@import`. `head.html` adds `preconnect` for Google Fonts performance.
 
 ---
 

@@ -1,27 +1,53 @@
+/*
+ * Cards Steps Block
+ * Horizontal step cards ("Hoe werkt het?")
+ * 3 cards: number, icon, label — bordered with centered content
+ */
+
 .cards-steps > ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
 }
 
 .cards-steps > ul > li {
   border: 1px solid #dadada;
+  border-radius: 8px;
   background-color: var(--background-color);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+  text-align: center;
+  padding: 24px 16px 20px;
+  flex: 1 1 140px;
+  min-width: 0;
 }
 
-.cards-steps .cards-steps-card-body {
-  margin: 16px;
-}
-
-.cards-steps .cards-steps-card-image {
+/* image container */
+.cards-steps .cards-steps-card-image,
+.cards-steps .cards-steps-card-body:first-child {
   line-height: 0;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
 }
 
 .cards-steps > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  width: 60px;
+  height: 60px;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+/* text label */
+.cards-steps .cards-steps-card-body:last-child {
+  margin: 0;
+}
+
+.cards-steps .cards-steps-card-body p {
+  margin: 0;
+  font-size: var(--body-font-size-m);
+  line-height: 1.4;
 }

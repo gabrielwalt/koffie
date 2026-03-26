@@ -1,42 +1,137 @@
+/*
+ * Cards Category Block
+ * Category icon tiles with border + arrow link
+ * Matches koffievoordeel.nl "Kies je koffie" section
+ */
+
 .cards-category > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
 }
 
 .cards-category > ul > li {
-  border: 1px solid #dadada;
+  border: 2px solid #535353;
+  border-radius: 5px;
   background-color: var(--background-color);
+  text-align: center;
+  padding: 12px 8px 10px;
+  cursor: pointer;
+  transition: border-color var(--transition-base);
 }
 
-.cards-category .cards-category-card-body {
-  margin: 16px;
+.cards-category > ul > li:hover {
+  border-color: var(--accent-color);
 }
 
-.cards-category .cards-category-card-image {
+.cards-category .cards-category-card-image,
+.cards-category .cards-category-card-body:first-child {
   line-height: 0;
+  display: flex;
+  justify-content: center;
+  padding: 4px;
+  margin-bottom: 4px;
 }
 
 .cards-category > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  width: 48px;
+  height: 48px;
+  aspect-ratio: auto;
+  object-fit: contain;
 }
 
-/* Brands variant — show logos only, hide text labels */
-.cards-category.brands .cards-category-card-body {
-  display: none;
+.cards-category .cards-category-card-body:last-child {
+  margin: 0;
+  padding: 0;
+}
+
+.cards-category .cards-category-card-body p {
+  margin: 0;
+}
+
+/* Override global button styles — show as text link with arrow */
+.cards-category .cards-category-card-body .button-container {
+  margin: 0;
+}
+
+.cards-category .cards-category-card-body a.button,
+.cards-category .cards-category-card-body a.button:any-link {
+  display: inline;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: normal;
+  text-decoration: none;
+  white-space: normal;
+}
+
+.cards-category .cards-category-card-body a.button::after {
+  content: ' \2192';
+}
+
+.cards-category .cards-category-card-body a.button:hover {
+  background-color: transparent;
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+@media (width >= 600px) {
+  .cards-category > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .cards-category > ul {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* ─── Brands variant ─── */
+.cards-category.brands > ul {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  align-items: center;
 }
 
 .cards-category.brands > ul > li {
   border: none;
+  border-radius: 0;
   background-color: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards-category.brands > ul > li:hover {
+  border-color: transparent;
+}
+
+.cards-category.brands .cards-category-card-body {
+  display: none;
 }
 
 .cards-category.brands > ul > li img {
+  width: auto;
+  height: 56px;
+  max-width: 103px;
   aspect-ratio: auto;
   object-fit: contain;
+}
+
+@media (width >= 900px) {
+  .cards-category.brands > ul {
+    grid-template-columns: repeat(6, 1fr);
+    justify-items: center;
+  }
 }

@@ -1,72 +1,101 @@
 /*
- * Copyright 2020 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ * Koffievoordeel.nl — Global Design System
+ * Migrated from https://www.koffievoordeel.nl/abonnement
  *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
+ * Fonts: Roboto (body), Roboto Slab (headings)
+ * Palette: warm browns, red accents, beige surfaces
  */
 
 :root {
   /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --background-color: #fff;
+  --light-color: #fbf8f5;
+  --dark-color: #3a3a3a;
+  --text-color: #3a3a3a;
+  --text-muted-color: #8f9090;
+  --link-color: #442a18;
+  --link-hover-color: #2e1c10;
+  --accent-color: #d13a39;
+  --accent-hover-color: #a82e2e;
+  --accent-text-color: #e03e2d;
+  --success-color: #37b24d;
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --heading-font-family: "Roboto Slab", roboto-slab-fallback, serif;
 
-  /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  /* body sizes — mobile-first (< 900px) */
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 13px;
 
-  /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  /* heading sizes — mobile-first */
+  --heading-font-size-xxl: 35px;
+  --heading-font-size-xl: 28px;
+  --heading-font-size-l: 22px;
+  --heading-font-size-m: 18px;
+  --heading-font-size-s: 16px;
+  --heading-font-size-xs: 14px;
 
   /* nav height */
   --nav-height: 64px;
+
+  /* layout */
+  --section-max-width: 1280px;
+  --section-gutter: 16px;
+
+  /* spacing */
+  --spacing-xs: 4px;
+  --spacing-s: 8px;
+  --spacing-m: 16px;
+  --spacing-l: 24px;
+  --spacing-xl: 40px;
+  --spacing-xxl: 70px;
+
+  /* transitions */
+  --transition-speed: 0.3s;
+  --transition-ease: ease-out;
+  --transition-base: var(--transition-speed) var(--transition-ease);
+
+  /* buttons */
+  --button-border-radius: 4px;
+  --button-padding: 15px 24px;
+  --button-font-size: 16px;
+  --button-font-weight: 700;
+  --button-letter-spacing: 0.32px;
+  --button-height: 48px;
+
+  /* borders & shadows */
+  --border-radius-s: 4px;
+  --border-radius-m: 8px;
 }
 
 /* fallback fonts */
-@font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
-  src: local('Arial');
-}
-
 @font-face {
   font-family: roboto-fallback;
   size-adjust: 99.529%;
   src: local('Arial');
 }
 
+@font-face {
+  font-family: roboto-slab-fallback;
+  size-adjust: 110%;
+  src: local('Georgia');
+}
+
+/* desktop sizes */
 @media (width >= 900px) {
   :root {
-    /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-
-    /* heading sizes */
-    --heading-font-size-xxl: 45px;
+    /* heading sizes — desktop */
+    --heading-font-size-xxl: 46px;
     --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
+    --heading-font-size-l: 29px;
+    --heading-font-size-m: 23px;
+    --heading-font-size-s: 18px;
+    --heading-font-size-xs: 16px;
+
+    /* layout */
+    --section-gutter: 20px;
   }
 }
 
@@ -77,7 +106,7 @@ body {
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.6;
+  line-height: 1.625;
 }
 
 body.appear {
@@ -98,6 +127,7 @@ footer .footer[data-block-status="loaded"] {
   visibility: visible;
 }
 
+/* headings */
 h1,
 h2,
 h3,
@@ -107,9 +137,10 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 700;
+  line-height: 1.15;
   scroll-margin: 40px;
+  color: var(--text-color);
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }
@@ -119,14 +150,15 @@ h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
 
+/* body text */
 p,
 dl,
 ol,
 ul,
 pre,
 blockquote {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-top: 0;
+  margin-bottom: 13px;
 }
 
 code,
@@ -136,14 +168,14 @@ pre {
 
 pre {
   padding: 16px;
-  border-radius: 8px;
+  border-radius: var(--border-radius-m);
   background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
 }
 
 main > div {
-  margin: 40px 16px;
+  margin: var(--spacing-xl) var(--section-gutter);
 }
 
 input,
@@ -158,6 +190,7 @@ a:any-link {
   color: var(--link-color);
   text-decoration: none;
   overflow-wrap: break-word;
+  transition: color var(--transition-base);
 }
 
 a:hover {
@@ -169,37 +202,45 @@ a:hover {
 a.button:any-link,
 button {
   box-sizing: border-box;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   max-width: 100%;
   margin: 12px 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  border: 0 none;
+  border-radius: var(--button-border-radius);
+  padding: var(--button-padding);
   font-family: var(--body-font-family);
   font-style: normal;
-  font-weight: 500;
-  line-height: 1.25;
+  font-weight: var(--button-font-weight);
+  font-size: var(--button-font-size);
+  letter-spacing: var(--button-letter-spacing);
+  line-height: 1.125;
+  height: var(--button-height);
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  background-color: var(--accent-color);
+  color: #fff;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: background-color var(--transition-base);
 }
 
 a.button:hover,
 a.button:focus,
 button:hover,
 button:focus {
-  background-color: var(--link-hover-color);
+  background-color: var(--accent-hover-color);
   cursor: pointer;
+  text-decoration: none;
 }
 
 button:disabled,
 button:disabled:hover {
   background-color: var(--light-color);
+  color: var(--text-muted-color);
   cursor: unset;
 }
 
@@ -210,6 +251,14 @@ button.secondary {
   color: var(--text-color);
 }
 
+a.button.secondary:hover,
+button.secondary:hover {
+  background-color: var(--text-color);
+  color: #fff;
+  border-color: var(--text-color);
+}
+
+/* images */
 main img {
   max-width: 100%;
   width: auto;
@@ -229,13 +278,13 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: var(--spacing-xl) 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: var(--section-max-width);
   margin: auto;
-  padding: 0 24px;
+  padding: 0 var(--section-gutter);
 }
 
 main > .section:first-of-type {
@@ -244,7 +293,7 @@ main > .section:first-of-type {
 
 @media (width >= 900px) {
   main > .section > div {
-    padding: 0 32px;
+    padding: 0 var(--section-gutter);
   }
 }
 
@@ -253,11 +302,11 @@ main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
-  padding: 40px 0;
+  padding: var(--spacing-xl) 0;
 }
 
 main .section.beige {
   background-color: #f5f0eb;
   margin: 0;
-  padding: 40px 0;
+  padding: var(--spacing-xl) 0;
 }

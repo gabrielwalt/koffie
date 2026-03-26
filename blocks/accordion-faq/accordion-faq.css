@@ -1,10 +1,21 @@
+/*
+ * Accordion FAQ Block
+ * FAQ items separated by top borders, chevron arrows
+ * Matches koffievoordeel.nl FAQ accordion style
+ */
+
 .accordion-faq details {
-  border: 1px solid #dadada;
+  border: none;
+  border-top: 2px solid #ddd;
+}
+
+.accordion-faq details:last-child {
+  border-bottom: 2px solid #ddd;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
 .accordion-faq details + details {
-  margin-top: 24px;
+  margin-top: 0;
 }
 
 .accordion-faq details p {
@@ -13,16 +24,17 @@
 
 .accordion-faq details summary {
   position: relative;
-  padding: 0 16px;
-  padding-right: 46px;
+  padding: 14px 46px 14px 25px;
   cursor: pointer;
   list-style: none;
-  overflow: auto;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-color);
   transition: background-color 0.2s;
 }
 
 .accordion-faq details[open] summary {
-  background-color: var(--light-color);
+  background-color: transparent;
 }
 
 .accordion-faq details summary:focus,
@@ -40,9 +52,9 @@
   top: 50%;
   right: 18px;
   transform: translateY(-50%) rotate(135deg);
-  width: 6px;
-  height: 6px;
-  border: 2px solid;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--text-color);
   border-width: 2px 2px 0 0;
   transition: transform 0.2s;
 }
@@ -52,7 +64,7 @@
 }
 
 .accordion-faq details .accordion-faq-item-body {
-  padding: 0 16px;
+  padding: 13px 13px 39px 25px;
 }
 
 .accordion-faq details:not([open]) .accordion-faq-item-body {
@@ -60,6 +72,6 @@
 }
 
 .accordion-faq details[open] .accordion-faq-item-body {
-  border-top: 1px solid #dadada;
-  background-color: var(--background-color);
+  border-top: none;
+  background-color: transparent;
 }

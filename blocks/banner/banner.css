@@ -1,6 +1,16 @@
+/*
+ * Banner Block
+ * Full-width art-directed responsive banner image
+ * Matches koffievoordeel.nl banner section
+ */
+
 .banner-container .banner-wrapper {
   max-width: unset;
   padding: 0;
+}
+
+.banner-container {
+  margin: 0;
 }
 
 .banner {
