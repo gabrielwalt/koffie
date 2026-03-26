@@ -102,7 +102,7 @@ Default content types come from `models/` spreads.
 | `cards` | `blocks/cards/` | Standard EDS cards |
 | `columns` | `blocks/columns/` | Standard EDS columns |
 | `fragment` | `blocks/fragment/` | Standard EDS fragment |
-| `header` / `footer` | `blocks/header/`, `blocks/footer/` | Chrome blocks (not in section filter) |
+| `header` / `footer` | `blocks/header/`, `blocks/footer/` | Chrome blocks (not in section filter) — styled for koffievoordeel |
 
 ### Custom blocks (created for migration)
 
@@ -116,6 +116,43 @@ Default content types come from `models/` spreads.
 | `tabs` | — | ARIA tab navigation (container with label + richtext panels) | `.tab-align-left` |
 | `accordion-faq` | — | FAQ accordion (`<details>/<summary>`) | `[data-collapsible="true"]` |
 | `hero-quote` | — | Hero with quote styling | _(not used on abonnement)_ |
+
+### Header and footer (chrome blocks)
+
+Both are fragment-based: `header.js` loads `/nav.plain.html`, `footer.js` loads `/footer.plain.html`.
+
+**Nav fragment** (`nav.plain.html` — 3 sections):
+
+| Section | Class (assigned by `header.js`) | Content |
+|---------|--------------------------------|---------|
+| 1 — Brand | `nav-brand` | Logo image linking to `/` (200px wide) |
+| 2 — Sections | `nav-sections` | `<ul>` with nav items; "Koffie" has nested `<ul>` dropdown |
+| 3 — Tools | `nav-tools` | Search icon (`<span class="icon icon-search">`) |
+
+**Footer fragment** (`footer.plain.html` — 2 sections):
+
+| Section | CSS target | Content |
+|---------|-----------|---------|
+| 1 — Categories | `.section:first-child` | 4 groups: `<p><strong>Heading</strong></p>` + `<ul>` links each (Koffie, Blog, Klantenservice, Koffievoordeel) |
+| 2 — Legal links | `.section:last-child` | Single `<ul>` with Sitemap, Algemene voorwaarden, Privacy, Cookie, Over Koffievoordeel |
+
+**Header CSS** (`blocks/header/header.css`) — koffievoordeel customizations:
+- Box-shadow: `0 2px 8px rgb(24 24 24 / 8%)`
+- Logo: `width: 200px` on `.nav-brand img`
+- Nav links: `font-weight: 700`, `gap: 8px`, `padding: 0 8px`
+- "Aanbiedingen" (last nav item): `color: var(--accent-color)` (red)
+- Dropdown: `border-radius: var(--border-radius-m)`, `box-shadow: 0 4px 12px`, beige bg, arrow caret via `::before` pseudo-element
+- Search icon: `24px × 24px`
+
+**Footer CSS** (`blocks/footer/footer.css`) — koffievoordeel customizations:
+- Background: `var(--light-color)` (beige `#fbf8f5`)
+- 4-column layout: `column-count: 4` on `.default-content-wrapper` at `≥ 900px`
+- Column headings: `var(--heading-font-family)` (Roboto Slab), `font-weight: 700`, `22px` desktop
+- Links: `var(--text-color)` in categories, `var(--link-color)` (brown) in bottom bar
+- Bottom bar: `border-top: 1px solid #dadada`, centered flex links
+- Hover rules combined into single grouped selector (lint compliance: `no-descending-specificity`)
+
+**File placement**: Fragment files must be at workspace root (`/workspace/nav.plain.html`, `/workspace/footer.plain.html`) for the local dev server to serve them at `/nav.plain.html` and `/footer.plain.html`. Copies also kept at `/workspace/content/` for consistency.
 
 ### Default content (`models/`)
 

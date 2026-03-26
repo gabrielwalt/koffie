@@ -4,6 +4,7 @@ header .nav-wrapper {
   width: 100%;
   z-index: 2;
   position: fixed;
+  box-shadow: 0 2px 8px rgb(24 24 24 / 8%);
 }
 
 header nav {
@@ -142,14 +143,14 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 /* brand */
 header .nav-brand {
   grid-area: brand;
-  flex-basis: 128px;
+  flex-basis: 200px;
   font-size: var(--heading-font-size-s);
   font-weight: 700;
   line-height: 1;
 }
 
 header nav .nav-brand img {
-  width: 128px;
+  width: 200px;
   height: auto;
 }
 
@@ -170,11 +171,11 @@ header nav[aria-expanded='true'] .nav-sections {
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
-  font-size: var(--body-font-size-s);
+  font-size: var(--body-font-size-m);
 }
 
 header nav .nav-sections ul > li {
-  font-weight: 500;
+  font-weight: 700;
 }
 
 header nav .nav-sections ul > li > ul {
@@ -224,13 +225,14 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections ul {
     display: flex;
-    gap: 24px;
+    gap: 8px;
     margin: 0;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
     flex: 0 1 auto;
     position: relative;
+    padding: 0 8px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
@@ -247,6 +249,8 @@ header nav .nav-sections ul > li > ul > li {
     padding: 16px;
     background-color: var(--light-color);
     white-space: initial;
+    border-radius: var(--border-radius-m);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
@@ -264,9 +268,19 @@ header nav .nav-sections ul > li > ul > li {
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 8px 0;
   }
+
+  /* "Aanbiedingen" last nav item in red */
+  header nav .nav-sections .default-content-wrapper > ul > li:last-child a {
+    color: var(--accent-color);
+  }
 }
 
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
+}
+
+header nav .nav-tools .icon {
+  width: 24px;
+  height: 24px;
 }

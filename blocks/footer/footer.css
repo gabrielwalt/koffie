@@ -1,20 +1,111 @@
+/*
+ * Footer Block
+ * 4-column footer with category links + bottom legal bar
+ * Matches koffievoordeel.nl footer
+ */
+
 footer {
   background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  font-size: var(--body-font-size-s);
 }
 
 footer .footer > div {
   margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+  max-width: 1280px;
 }
 
 footer .footer p {
   margin: 0;
 }
 
+/* main footer section — category columns */
+footer .footer .section:first-child {
+  padding: 40px 24px 24px;
+}
+
+footer .footer .section:first-child .default-content-wrapper p strong {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 12px;
+  margin-top: 0;
+}
+
+footer .footer .section:first-child .default-content-wrapper ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: block;
+}
+
+footer .footer .section:first-child .default-content-wrapper ul li {
+  padding: 4px 0;
+}
+
+footer .footer .section:first-child .default-content-wrapper ul li a {
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+/* bottom links section */
+footer .footer .section:last-child {
+  padding: 16px 24px;
+  border-top: 1px solid #dadada;
+}
+
+footer .footer .section:last-child .default-content-wrapper ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  justify-content: center;
+}
+
+footer .footer .section:last-child .default-content-wrapper ul li a {
+  color: var(--link-color);
+  font-size: var(--body-font-size-s);
+  text-decoration: none;
+}
+
+/* hover states for all footer links */
+footer .footer .section:first-child .default-content-wrapper ul li a:hover,
+footer .footer .section:last-child .default-content-wrapper ul li a:hover {
+  text-decoration: underline;
+}
+
 @media (width >= 900px) {
-  footer .footer > div {
+  footer .footer .section:first-child {
     padding: 40px 32px 24px;
+  }
+
+  /* 4-column grid using CSS columns */
+  footer .footer .section:first-child .default-content-wrapper {
+    column-count: 4;
+    column-gap: 32px;
+  }
+
+  /* keep heading + list together in same column */
+  footer .footer .section:first-child .default-content-wrapper p {
+    break-inside: avoid;
+    break-after: avoid;
+  }
+
+  footer .footer .section:first-child .default-content-wrapper ul {
+    break-inside: avoid;
+    break-before: avoid;
+  }
+
+  footer .footer .section:first-child .default-content-wrapper p strong {
+    font-size: 22px;
+  }
+
+  footer .footer .section:last-child {
+    padding: 16px 32px;
   }
 }

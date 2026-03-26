@@ -254,12 +254,42 @@ export default function decorate(block) {
 
 ---
 
+## Fragment files (nav / footer)
+
+Header and footer load from `.plain.html` fragment files via `loadFragment()`.
+
+### Critical format rules
+
+1. **Bare `<div>` at top level** — no `<body>`, `<header>`, `<footer>` wrappers. Each top-level `<div>` becomes a section.
+2. **No inner `<div>` wrappers** — content must sit directly inside the top-level `<div>`. Extra `<div>` creates nesting (`default-content-wrapper > div > ul`) that breaks selectors expecting `default-content-wrapper > ul`.
+3. **EDS icons** — use `<span class="icon icon-search"></span>` with NO manual `<img>` inside. EDS auto-loads icons from `/icons/{name}.svg`.
+
+### File placement for local dev
+
+The local dev server (`aem up`) serves files based on their path relative to `/workspace/`:
+
+| Fragment | Must be at | Served at |
+|----------|-----------|-----------|
+| Nav | `/workspace/nav.plain.html` | `/nav.plain.html` |
+| Footer | `/workspace/footer.plain.html` | `/footer.plain.html` |
+
+Files under `/workspace/content/` serve at `/content/...` — a different path. `header.js` and `footer.js` load from root paths (`/nav`, `/footer`), so the fragments must be at the workspace root.
+
+### How `decorateSections` works (aem.js)
+
+- A `<div>` **without** className → treated as default content → wrapped in `default-content-wrapper`
+- A `<div>` **with** className → creates a non-default section wrapper
+- `header.js` assigns classes `nav-brand`, `nav-sections`, `nav-tools` to child sections 0, 1, 2
+
+---
+
 ## CSS conventions
 
 - Scope rules under `.blockname` or `.blockname-*` **element** classes.
 - Prefer block-prefixed class names in JS (`blockname-card`, not bare `.card`).
 - Avoid `-container` / `-wrapper` on arbitrary block internals if they collide with section language in your project.
 - Prefer variant classes from the model over `:nth-child()` / fragile sibling assumptions; authors reorder blocks freely in UE.
+- **`no-descending-specificity`**: When multiple sections define `a` and `a:hover` rules at the same specificity, place all `a` selectors before all `a:hover` selectors. Combine hover rules into a single grouped selector if needed (e.g., `.section:first-child ... a:hover, .section:last-child ... a:hover { ... }`).
 
 ---
 
