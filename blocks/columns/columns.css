@@ -29,6 +29,19 @@
   display: block;
 }
 
+/* Callout / highlight box within a column */
+.columns blockquote {
+  background: #fbc275;
+  border-radius: 4px;
+  padding: 10px 40px;
+  margin: 0 20px 13px;
+  text-align: center;
+}
+
+.columns blockquote h3 {
+  font-size: 18px;
+}
+
 @media (width >= 900px) {
   .columns > div {
     align-items: start;

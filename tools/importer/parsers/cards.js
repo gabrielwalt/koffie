@@ -1,5 +1,6 @@
 /* eslint-disable */
 /* global WebImporter */
+import { createBlockHelper } from './utils.js';
 /**
  * Parser for cards block.
  * Base: cards. Source: koffievoordeel.nl slick-slider carousel (brand landing GMI cards).
@@ -14,33 +15,6 @@
  *     - div > p (card description)
  *     - div > a.pagebuilder-button-link (CTA button)
  */
-function createBlockHelper(doc, { name, cells }) {
-  if (typeof WebImporter !== 'undefined' && WebImporter.Blocks) {
-    return WebImporter.Blocks.createBlock(doc, { name, cells });
-  }
-  const table = doc.createElement('table');
-  const headerRow = doc.createElement('tr');
-  const headerCell = doc.createElement('th');
-  headerCell.colSpan = 100;
-  headerCell.textContent = name;
-  headerRow.appendChild(headerCell);
-  table.appendChild(headerRow);
-  cells.forEach((row) => {
-    const tr = doc.createElement('tr');
-    const rowArr = Array.isArray(row) ? row : [row];
-    rowArr.forEach((cell) => {
-      const td = doc.createElement('td');
-      if (cell instanceof Node) {
-        td.appendChild(cell);
-      } else if (typeof cell === 'string') {
-        td.textContent = cell;
-      }
-      tr.appendChild(td);
-    });
-    table.appendChild(tr);
-  });
-  return table;
-}
 
 export default function parse(element, { document }) {
   // Find all slide items (cards)

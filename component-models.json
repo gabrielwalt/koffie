@@ -478,6 +478,39 @@
     ]
   },
   {
+    "id": "blog-header",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "description": "The blog post title (rendered as H1)."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "category",
+        "label": "Category",
+        "description": "Blog category label (e.g. Koffieweetjes)."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "author",
+        "label": "Author",
+        "description": "Author name displayed in the meta line."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "date",
+        "label": "Date",
+        "description": "Publication date (e.g. 01-09-2025)."
+      }
+    ]
+  },
+  {
     "id": "hero",
     "fields": [
       {

@@ -1,0 +1,38 @@
+.blog-header {
+  margin: 0;
+  padding: var(--spacing-l, 32px) 0 0;
+}
+
+.blog-header-content {
+  text-align: left;
+}
+
+.blog-header-category {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent-color, #d13a39);
+  margin: 0 0 12px;
+}
+
+.blog-header-content h1 {
+  font-family: var(--heading-font-family);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 12px;
+}
+
+.blog-header-meta {
+  font-size: 14px;
+  color: var(--text-muted-color, #8f9090);
+  margin: 0;
+}
+
+@media (width >= 900px) {
+  .blog-header-content h1 {
+    font-size: 40px;
+  }
+}

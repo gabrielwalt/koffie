@@ -430,15 +430,14 @@
       "sections": [
         {
           "id": "section-1",
-          "name": "Blog Hero & Intro",
+          "name": "Blog Header",
           "selector": ".amblog-content > div:first-child",
           "style": null,
           "blocks": [
+            "blog-header",
             "columns"
           ],
-          "defaultContent": [
-            "h1"
-          ]
+          "defaultContent": []
         },
         {
           "id": "section-2",

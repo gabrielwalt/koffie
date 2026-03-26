@@ -150,6 +150,13 @@ h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
 
+/* blog template — horizontal line above H2 headings */
+body.template-blog main h2 {
+  border-top: 1px solid #dadada;
+  padding-top: 1em;
+  margin-top: 1.2em;
+}
+
 /* body text */
 p,
 dl,

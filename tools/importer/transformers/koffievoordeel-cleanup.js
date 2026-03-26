@@ -19,6 +19,38 @@ function removeSelectors(el, selectors) {
   }
 }
 
+/**
+ * Convert styled callout boxes (e.g. .content-gmi-1) to <blockquote>.
+ * Merges consecutive siblings with the same callout class into one blockquote.
+ */
+function convertCalloutBoxes(root) {
+  const doc = root.ownerDocument || document;
+  const callouts = Array.from(root.querySelectorAll('[class*="content-gmi"]'));
+  const processed = new Set();
+
+  for (const el of callouts) {
+    if (processed.has(el)) continue;
+    processed.add(el);
+
+    const bq = doc.createElement('blockquote');
+
+    // Move this element's children into the blockquote
+    while (el.firstChild) bq.appendChild(el.firstChild);
+
+    // Merge consecutive siblings with the same class pattern
+    let next = el.nextElementSibling;
+    while (next && next.matches('[class*="content-gmi"]')) {
+      processed.add(next);
+      while (next.firstChild) bq.appendChild(next.firstChild);
+      const toRemove = next;
+      next = next.nextElementSibling;
+      toRemove.remove();
+    }
+
+    el.replaceWith(bq);
+  }
+}
+
 export default function transform(hookName, element, payload) {
   if (hookName === TransformHook.beforeTransform) {
     // Cookie consent
@@ -37,6 +69,26 @@ export default function transform(hookName, element, payload) {
       const div = doc.createElement('div');
       while (bq.firstChild) div.appendChild(bq.firstChild);
       bq.replaceWith(div);
+    });
+
+    // Convert styled callout boxes (.content-gmi-*) to <blockquote>.
+    // Merge consecutive siblings with the same class into a single blockquote.
+    // These appear on brand pages as amber highlight boxes within columns.
+    convertCalloutBoxes(element);
+
+
+    // Remove mobile-only duplicate columns within pagebuilder column groups.
+    // Magento creates hidden .pagebuilder-column.mobile columns (display:none on desktop)
+    // that duplicate desktop images for responsive layouts. Remove them and clean up
+    // empty column-lines that result.
+    element.querySelectorAll('.pagebuilder-column.mobile').forEach((col) => {
+      const line = col.parentElement;
+      col.remove();
+      // If the parent column-line is now empty, remove it too
+      if (line && line.classList.contains('pagebuilder-column-line')
+          && line.children.length === 0) {
+        line.remove();
+      }
     });
 
     // Remove hidden desktop containers (duplicate of visible mobile versions)

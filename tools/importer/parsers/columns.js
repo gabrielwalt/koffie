@@ -1,5 +1,6 @@
 /* eslint-disable */
 /* global WebImporter */
+import { createBlockHelper } from './utils.js';
 /**
  * Parser for columns block.
  * Base: columns. Source: koffievoordeel.nl pagebuilder-column-group.
@@ -9,33 +10,6 @@
  * Target: Columns table with N columns per row, each cell containing the column's content.
  */
 
-function createBlockHelper(doc, { name, cells }) {
-  if (typeof WebImporter !== 'undefined' && WebImporter.Blocks) {
-    return WebImporter.Blocks.createBlock(doc, { name, cells });
-  }
-  const table = doc.createElement('table');
-  const headerRow = doc.createElement('tr');
-  const headerCell = doc.createElement('th');
-  headerCell.colSpan = 100;
-  headerCell.textContent = name;
-  headerRow.appendChild(headerCell);
-  table.appendChild(headerRow);
-  cells.forEach((row) => {
-    const tr = doc.createElement('tr');
-    const rowArr = Array.isArray(row) ? row : [row];
-    rowArr.forEach((cell) => {
-      const td = doc.createElement('td');
-      if (cell instanceof Node) {
-        td.appendChild(cell);
-      } else if (typeof cell === 'string') {
-        td.textContent = cell;
-      }
-      tr.appendChild(td);
-    });
-    table.appendChild(tr);
-  });
-  return table;
-}
 
 export default function parse(element, { document }) {
   // Find all direct column children (may be nested under .pagebuilder-column-line)
