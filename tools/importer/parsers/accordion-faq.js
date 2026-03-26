@@ -55,11 +55,13 @@ export default function parse(element, { document }) {
     const tabpanel = item.querySelector('[role="tabpanel"]');
     const contentDiv = tabpanel ? (tabpanel.querySelector('.content') || tabpanel) : null;
 
-    // Summary cell with field hint (plain text — model field is "text" not "richtext")
+    // Summary cell with field hint
     const summaryFrag = document.createDocumentFragment();
     summaryFrag.appendChild(document.createComment(' field:summary '));
     if (tab) {
-      summaryFrag.appendChild(document.createTextNode(tab.textContent.trim()));
+      const p = document.createElement('p');
+      p.textContent = tab.textContent.trim();
+      summaryFrag.appendChild(p);
     }
 
     // Text cell with field hint

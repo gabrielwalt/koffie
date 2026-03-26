@@ -69,6 +69,22 @@ function createSectionMetadata(doc, props) {
 
 function buildProductCard(product, document) {
   const productImg = product.querySelector('.product-image-photo.photo');
+
+  // Product type + weight from the details-top area
+  // Type text (e.g. "koffiebonen") is extracted by subtracting weight from full text
+  const detailsTop = product.querySelector('.product-item-details-top .small')
+    || product.querySelector('.product-item-details-top');
+  let typeText = null;
+  let weightText = null;
+  if (detailsTop) {
+    const fullText = detailsTop.textContent.replace(/\s+/g, ' ').trim();
+    const weightDiv = detailsTop.querySelector('div');
+    weightText = weightDiv ? weightDiv.textContent.replace(/\s+/g, ' ').trim() : null;
+    if (weightText && fullText.length > weightText.length) {
+      typeText = fullText.replace(weightText, '').trim();
+    }
+  }
+
   const nameLink = product.querySelector('.product-item-link');
   const strengthLabel = product.querySelector('.strength-label');
   const description = product.querySelector('.product-item-description');
@@ -89,6 +105,14 @@ function buildProductCard(product, document) {
   // Text cell (richtext)
   const textFrag = document.createDocumentFragment();
   textFrag.appendChild(document.createComment(' field:text '));
+
+  // Product type + weight combined (e.g. "koffiebonen · 1 kg | 22,49/kg")
+  if (typeText || weightText) {
+    const p = document.createElement('p');
+    const parts = [typeText, weightText].filter(Boolean);
+    p.textContent = parts.join(' · ');
+    textFrag.appendChild(p);
+  }
 
   if (nameLink) {
     const h3 = document.createElement('h3');
@@ -148,14 +172,46 @@ export default function parse(element, { document }) {
 
   if (tabPanels.length === 0) return;
 
+  // Detect whether the tabs area has a background color (beige section)
+  let sectionStyle = null;
+  let el = element;
+  while (el && el !== document.body) {
+    const bg = el.ownerDocument.defaultView
+      ? el.ownerDocument.defaultView.getComputedStyle(el).backgroundColor
+      : null;
+    if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') {
+      sectionStyle = 'beige';
+      break;
+    }
+    el = el.parentElement;
+  }
+
   const frag = document.createDocumentFragment();
 
-  // Emit the tabs title heading (e.g. "Populair bij abonnees") if present
+  // Detect eyebrow text (e.g. "ONTDEK") from .tabs-subtitle
+  const eyebrow = element.querySelector('.tabs-subtitle');
+
+  // Emit the tabs title heading (e.g. "Populair bij abonnees" / "Aanraders bij")
   const tabsTitle = element.querySelector('.tabs-title');
-  if (tabsTitle) {
-    const h2 = document.createElement('h2');
-    h2.textContent = tabsTitle.textContent.trim();
-    frag.appendChild(h2);
+
+  // If there's an eyebrow or title, emit them in their own section before the tabs.
+  // A section break (<hr>) separates this heading section from whatever precedes it.
+  if (eyebrow || tabsTitle) {
+    frag.appendChild(document.createElement('hr'));
+    if (eyebrow) {
+      const p = document.createElement('p');
+      p.textContent = eyebrow.textContent.trim();
+      frag.appendChild(p);
+    }
+    if (tabsTitle) {
+      const h2 = document.createElement('h2');
+      h2.textContent = tabsTitle.textContent.trim();
+      frag.appendChild(h2);
+    }
+    // Add section-metadata with beige style if detected
+    if (sectionStyle) {
+      frag.appendChild(createSectionMetadata(document, { style: sectionStyle }));
+    }
   }
 
   // Output each tab panel as its own section
@@ -185,8 +241,10 @@ export default function parse(element, { document }) {
       frag.appendChild(createBlockHelper(document, { name: 'cards-product', cells }));
     }
 
-    // Section Metadata with tabTitle for auto-blocking
-    frag.appendChild(createSectionMetadata(document, { tabTitle: label }));
+    // Section Metadata with tabTitle (and style if detected)
+    const metaProps = { tabTitle: label };
+    if (sectionStyle) metaProps.style = sectionStyle;
+    frag.appendChild(createSectionMetadata(document, metaProps));
   });
 
   element.replaceWith(frag);

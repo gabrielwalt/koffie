@@ -56,6 +56,18 @@ export default function parse(element, { document }) {
 
   if (nonEmptyColumns.length === 0) return;
 
+  // Skip single-column groups — these are wrappers, not real columns blocks.
+  // Unwrap the content so it becomes default content instead.
+  if (nonEmptyColumns.length === 1) {
+    const frag = document.createDocumentFragment();
+    const col = nonEmptyColumns[0];
+    while (col.firstChild) {
+      frag.appendChild(col.firstChild);
+    }
+    element.replaceWith(frag);
+    return;
+  }
+
   // Build a single row with all columns
   const row = nonEmptyColumns.map((col) => {
     const frag = document.createDocumentFragment();

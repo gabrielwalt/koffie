@@ -136,6 +136,30 @@ export default function transform(hookName, element, payload) {
   // Collect all anchors first
   const anchors = sections.map((s) => findSectionAnchor(element, s));
 
+  // Resolve anchors: if an anchor is inside a block table, walk up to the table element.
+  // This prevents inserting <hr> and section-metadata inside block cells.
+  for (let i = 0; i < anchors.length; i++) {
+    if (!anchors[i]) continue;
+    let el = anchors[i];
+    let parent = el.parentElement;
+    while (parent && parent !== element) {
+      if (parent.tagName === 'TABLE') {
+        el = parent;
+        break;
+      }
+      parent = parent.parentElement;
+    }
+    anchors[i] = el;
+  }
+
+  // Deduplicate anchors: if two adjacent sections resolve to the same element,
+  // skip the later one to avoid empty sections (consecutive <hr><hr>).
+  for (let i = 1; i < anchors.length; i++) {
+    if (anchors[i] && anchors[i] === anchors[i - 1]) {
+      anchors[i] = null;
+    }
+  }
+
   // Process forward: for each section boundary, insert hr + optional section-metadata
   for (let i = 1; i < sections.length; i++) {
     if (!anchors[i]) continue;
@@ -157,5 +181,65 @@ export default function transform(hookName, element, payload) {
   if (sections[lastIdx].style) {
     const metaBlock = createBlock(doc, 'Section Metadata', { style: sections[lastIdx].style });
     element.appendChild(metaBlock);
+  }
+
+  // Post-process: remove empty sections.
+  // An empty section is a span between two <hr> elements (or between start/end and <hr>)
+  // that contains no meaningful content — only whitespace, comments, or section-metadata.
+  // Orphaned section-metadata is moved into the preceding section before the <hr> is removed.
+  cleanupEmptySections(element);
+}
+
+/**
+ * Check whether a table element is a Section Metadata block table.
+ */
+function isSectionMetaTable(node) {
+  if (!node || node.tagName !== 'TABLE') return false;
+  const header = node.querySelector('tr:first-child th, tr:first-child td');
+  return header && normalizeBlockName(header.textContent) === 'section metadata';
+}
+
+/**
+ * Remove empty sections created by stray <hr> elements.
+ * For each section (content between two <hr> elements), if it contains no
+ * meaningful content (only whitespace, comments, or section-metadata tables),
+ * merge it into the previous section by moving any section-metadata before
+ * the <hr> and then removing the <hr>.
+ */
+function cleanupEmptySections(root) {
+  // Find all <hr> elements at any depth and check for empty sections after each
+  let changed = true;
+  while (changed) {
+    changed = false;
+    const hrs = Array.from(root.querySelectorAll('hr'));
+    for (const hr of hrs) {
+      // Walk forward from this <hr> to the next <hr> at the same level (or end of parent)
+      const contentNodes = [];
+      const metaTables = [];
+      let node = hr.nextSibling;
+      while (node) {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          if (node.tagName === 'HR') break;
+          if (isSectionMetaTable(node)) {
+            metaTables.push(node);
+          } else {
+            contentNodes.push(node);
+          }
+        } else if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+          contentNodes.push(node);
+        }
+        node = node.nextSibling;
+      }
+
+      if (contentNodes.length === 0) {
+        // Section after this <hr> is empty — merge with previous section
+        for (const meta of metaTables) {
+          hr.before(meta);
+        }
+        hr.remove();
+        changed = true;
+        break;
+      }
+    }
   }
 }

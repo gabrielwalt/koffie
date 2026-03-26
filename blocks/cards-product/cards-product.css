@@ -1,7 +1,7 @@
 /*
  * Cards Product Block
- * Product card: image, name, intensity, price, CTA
- * Matches koffievoordeel.nl subscription product cards
+ * Product card: type, weight, name, intensity, description, price, CTA
+ * Matches koffievoordeel.nl product cards
  */
 
 .cards-product > ul {
@@ -13,27 +13,30 @@
   gap: 24px;
 }
 
+/* Card container — thin beige border, rounded corners */
 .cards-product > ul > li {
-  border: none;
-  border-radius: 0;
+  border-radius: 4px;
   background-color: var(--background-color);
+  box-shadow: #f6ede5 0 0 0 1px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-/* Product image */
+/* Product image — light beige background, centered */
 .cards-product .cards-product-card-image {
   line-height: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 16px;
-  background-color: var(--background-color);
+  background-color: var(--light-color, #fbf8f5);
 }
 
-.cards-product > ul > li img {
+.cards-product .cards-product-card-image img {
   width: auto;
   max-width: 100%;
-  height: 160px;
+  height: 180px;
   aspect-ratio: auto;
   object-fit: contain;
 }
@@ -41,12 +44,41 @@
 /* Product info */
 .cards-product .cards-product-card-body {
   margin: 0;
-  padding: 0 16px 16px;
+  padding: 12px 16px 16px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
+/* Type + weight wrapper */
+.cards-product .cards-product-type-weight {
+  margin-bottom: 8px;
+}
+
+.cards-product .cards-product-type {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-muted-color, #8f9090);
+  line-height: 1.4;
+}
+
+.cards-product .cards-product-type-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.cards-product .cards-product-weight {
+  display: block;
+  font-size: 14px;
+  color: var(--text-muted-color, #8f9090);
+  line-height: 1.4;
+  padding-left: 26px;
+}
+
+/* Product name */
 .cards-product .cards-product-card-body h3 {
   font-family: var(--heading-font-family);
   font-size: 18px;
@@ -65,49 +97,103 @@
   color: var(--accent-color);
 }
 
-/* Intensity line */
-.cards-product .cards-product-card-body p strong {
-  color: var(--text-color);
+/* Intensity dots */
+.cards-product .cards-product-intensity {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.cards-product .cards-product-intensity-label {
   font-size: 14px;
+  font-weight: 700;
+  color: var(--text-color);
+  min-width: 16px;
+}
+
+.cards-product .cards-product-intensity-dots {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.cards-product .cards-product-intensity-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #cdcdcd;
+  background-color: transparent;
+  display: inline-block;
+}
+
+.cards-product .cards-product-intensity-dots .dot.filled {
+  background-color: var(--link-color, #442a18);
+  border-color: var(--link-color, #442a18);
 }
 
 /* Description text */
 .cards-product .cards-product-card-body p {
   font-size: 14px;
   line-height: 1.5;
-  color: var(--text-color);
+  color: var(--text-muted-color, #8f9090);
   margin-bottom: 8px;
 }
 
-/* Price line: strikethrough old + bold new */
-.cards-product .cards-product-card-body del,
-.cards-product .cards-product-card-body s {
-  color: var(--text-muted-color);
-  font-size: 16px;
-  font-weight: 400;
-  margin-right: 8px;
+/* Price area */
+.cards-product .cards-product-price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
-.cards-product .cards-product-card-body p:has(del) strong,
-.cards-product .cards-product-card-body p:has(s) strong {
+.cards-product .cards-product-price-old {
   font-size: 18px;
-  font-weight: 700;
-  color: var(--text-color);
+  color: var(--text-muted-color, #8f9090);
+  text-decoration: line-through;
 }
 
-/* CTA button — full width */
+.cards-product .cards-product-price-new {
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--accent-color, #d13a39);
+  line-height: 1;
+}
+
+.cards-product .cards-product-discount {
+  font-size: 14px;
+  font-weight: 700;
+  color: #37b24d;
+}
+
+/* CTA button — full width with arrow */
 .cards-product .cards-product-card-body .button-container {
   margin-top: auto;
 }
 
 .cards-product .cards-product-card-body a.button:any-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
   background-color: var(--accent-color);
   color: #fff;
   font-weight: var(--button-font-weight);
   font-size: var(--button-font-size);
-  border-radius: var(--button-border-radius);
-  height: var(--button-height);
+  font-style: italic;
+  border-radius: 4px;
+  padding: 15px 24px;
+}
+
+.cards-product .cards-product-card-body a.button:any-link::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 12px;
+  background: url('/blocks/cards-product/icons/arrow-right-white.svg') no-repeat center / contain;
+  flex-shrink: 0;
 }
 
 .cards-product .cards-product-card-body a.button:hover {
@@ -125,41 +211,4 @@
   .cards-product > ul {
     grid-template-columns: repeat(3, 1fr);
   }
-}
-
-/* Fallback: undecorated cards-product tables (when block decoration fails) */
-main table:has(th:only-child) {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-main table:has(th:only-child) > thead {
-  display: none;
-}
-
-main table:has(th:only-child) > tbody > tr {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 12px;
-  align-items: start;
-  padding: 16px 0;
-  border-bottom: 1px solid #e8e8e8;
-}
-
-main table:has(th:only-child) > tbody > tr > td:first-child img {
-  width: 100px;
-  height: auto;
-  object-fit: contain;
-}
-
-main table:has(th:only-child) > tbody > tr > td:last-child h3 {
-  margin-top: 0;
-  font-size: var(--heading-font-size-m);
-}
-
-main table:has(th:only-child) > tbody > tr > td:last-child a.button:any-link {
-  font-size: var(--body-font-size-s);
-  padding: 10px 16px;
-  height: auto;
 }

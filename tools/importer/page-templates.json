@@ -138,7 +138,7 @@
         {
           "name": "cards-product",
           "instances": [
-            ".widget-product-carousel .product-items"
+            "ol.product-items"
           ]
         },
         {
@@ -171,9 +171,9 @@
           "defaultContent": []
         },
         {
-          "id": "section-5",
-          "name": "Related Products",
-          "selector": ".widget-product-carousel",
+          "id": "section-3",
+          "name": "Inline Products",
+          "selector": "ol.product-items",
           "style": null,
           "blocks": [
             "cards-product"
@@ -311,24 +311,16 @@
           "selector": ".header-banner-illy",
           "style": "brand-hero",
           "blocks": [
+            "hero-italia",
             "hero"
           ],
           "defaultContent": []
         },
         {
-          "id": "section-2",
-          "name": "Promotional Banner",
-          "selector": ".column.main > div:nth-of-type(2)",
-          "style": null,
-          "blocks": [],
-          "defaultContent": [
-            "p > a > picture"
-          ]
-        },
-        {
           "id": "section-3",
           "name": "Italian Quality",
           "selector": ".content-gmi-1",
+          "headingMatch": "Italiaanse kwaliteit",
           "style": null,
           "blocks": [
             "columns"
@@ -339,6 +331,7 @@
           "id": "section-4",
           "name": "Exclusive at Koffievoordeel",
           "selector": ".column.main .pagebuilder-column-group:nth-of-type(2)",
+          "headingMatch": "Exclusief",
           "style": null,
           "blocks": [
             "columns"
@@ -349,6 +342,7 @@
           "id": "section-5",
           "name": "Over smaak gesproken",
           "selector": ".column.main > div:nth-of-type(5)",
+          "headingMatch": "Over smaak gesproken",
           "style": "dark",
           "blocks": [
             "columns"
@@ -361,6 +355,7 @@
           "id": "section-6",
           "name": "Product Assortment Tabs",
           "selector": ".tab-align-left",
+          "headingMatch": "Ontdek het assortiment",
           "style": null,
           "blocks": [
             "tabs"
@@ -383,6 +378,7 @@
           "id": "section-8",
           "name": "Sustainability",
           "selector": ".column.main > div:nth-of-type(8)",
+          "headingMatch": "Duurzaamheid",
           "style": null,
           "blocks": [
             "columns"
@@ -393,6 +389,7 @@
           "id": "section-9",
           "name": "Discover GMI World",
           "selector": ".slick-slider",
+          "headingMatch": "Ontdek de wereld",
           "style": null,
           "blocks": [
             "cards"

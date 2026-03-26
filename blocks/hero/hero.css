@@ -30,8 +30,40 @@
   height: 100%;
 }
 
+/* Brand hero section: second hero with gold + white text over landscape image */
+.section.brand-hero .hero-container {
+  margin: 0;
+}
+
+.section.brand-hero .hero {
+  min-height: 400px;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px 24px;
+}
+
+.section.brand-hero .hero h2 {
+  color: #fff;
+  text-shadow: 0 2px 7px #000;
+  font-size: 28px;
+  margin: 0;
+}
+
+.section.brand-hero .hero h2 strong {
+  color: #d18f3a;
+  display: block;
+}
+
 @media (width >= 900px) {
   .hero {
     padding: 40px 32px;
+  }
+
+  .section.brand-hero .hero {
+    min-height: 500px;
+  }
+
+  .section.brand-hero .hero h2 {
+    font-size: 32px;
   }
 }

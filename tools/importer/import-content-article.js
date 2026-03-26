@@ -42,7 +42,7 @@ const PAGE_TEMPLATE = {
     },
     {
       name: 'cards-product',
-      instances: ['.widget-product-carousel .product-items'],
+      instances: ['ol.product-items'],
     },
     {
       name: 'tabs',
@@ -67,9 +67,9 @@ const PAGE_TEMPLATE = {
       defaultContent: [],
     },
     {
-      id: 'section-5',
-      name: 'Related Products',
-      selector: '.widget-product-carousel',
+      id: 'section-3',
+      name: 'Inline Products',
+      selector: 'ol.product-items',
       style: null,
       blocks: ['cards-product'],
       defaultContent: [],

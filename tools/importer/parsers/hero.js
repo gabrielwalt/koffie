@@ -2,17 +2,17 @@
 /* global WebImporter */
 /**
  * Parser for hero block.
- * Base: hero. Source: koffievoordeel.nl .header-banner-illy (brand hero banner).
+ * Base: hero. Source: koffievoordeel.nl hero banner containers.
  *
  * UE Model fields: image (reference), imageAlt (collapsed), text (richtext)
  * Target: Hero table with 2 rows:
  *   Row 1: Background image (field: image)
  *   Row 2: Text content - heading + subheading (field: text)
  *
- * Source DOM: .header-banner-illy contains:
- *   - img (background image, or inline <img> for logo)
- *   - .gmi-header-text h2 (main heading)
- *   - .gmi-header-text h3 (subheading, optional)
+ * Source DOM: Hero container (e.g. .header-banner-illy, generic banner div) contains:
+ *   - img (background/hero image)
+ *   - h1/h2 heading (main heading)
+ *   - h2/h3 subheading (optional)
  */
 function createBlockHelper(doc, { name, cells }) {
   if (typeof WebImporter !== 'undefined' && WebImporter.Blocks) {
@@ -43,12 +43,14 @@ function createBlockHelper(doc, { name, cells }) {
 }
 
 export default function parse(element, { document }) {
-  // Find the background image - it's the first direct img child or a figure/picture
-  const bgImg = element.querySelector(':scope > img, figure img, picture img, .image-wrapper img');
+  // Find the hero image — try common patterns: direct img, picture/figure, wrapper divs
+  const bgImg = element.querySelector(':scope > img, :scope > a > img, picture img, figure img, .image-wrapper img, [class*="image"] img, [class*="banner"] img');
 
-  // Find heading text
-  const heading = element.querySelector('.gmi-header-text h2, h2, h1');
-  const subheading = element.querySelector('.gmi-header-text h3, h3');
+  // Find heading text — prefer h1 > h2, look inside text wrapper divs or directly
+  const heading = element.querySelector('h1, h2');
+  const subheading = heading
+    ? element.querySelector(`${heading.tagName === 'H1' ? 'h2' : 'h3'}`)
+    : null;
 
   const cells = [];
 

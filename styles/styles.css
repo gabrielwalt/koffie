@@ -297,6 +297,17 @@ main .section.highlight {
 
 main .section.beige {
   background-color: #f5f0eb;
+  padding-top: var(--spacing-l, 32px);
+  padding-bottom: var(--spacing-l, 32px);
+}
+
+/* eyebrow text before heading in beige sections */
+main .section.beige .default-content-wrapper > p:first-child:has(+ h2) {
+  text-transform: uppercase;
+  font-size: var(--body-font-size-xs, 12px);
+  letter-spacing: 0.1em;
+  color: var(--text-muted-color, #8f9090);
+  margin-bottom: 0;
 }
 
 main .section.dark {

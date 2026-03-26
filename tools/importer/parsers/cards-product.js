@@ -2,13 +2,16 @@
 /* global WebImporter */
 
 /**
- * Parser for cards-product.
- * Base: cards. Source: https://www.koffievoordeel.nl/abonnement
- * Model fields (per card): image (reference), text (richtext)
+ * Parser for cards-product block.
+ * Base: cards. Model fields (per card): image (reference), text (richtext)
  * Container block: Each product = 1 row with [image | text]
- * Source selector: .tabs-style-theme-related .product-items
- * Generated: 2026-03-25
- * Updated: 2026-03-25v4
+ * Source selectors: .product-items (ol/ul), .widget-product-carousel .product-items
+ *
+ * Handles Magento product list markup with fallbacks for common patterns:
+ *   - Product image: .product-image-photo, img inside product link
+ *   - Product name: .product-item-link, h2/h3 inside product item
+ *   - Price: .special-price .price / .old-price .price, or .price alone
+ *   - CTA: .actions-primary a, or any link inside actions container
  */
 
 function createBlockHelper(doc, { name, cells }) {
@@ -42,22 +45,51 @@ function createBlockHelper(doc, { name, cells }) {
 export default function parse(element, { document }) {
   if (!element.parentElement) return;
 
-  // element = .product-items (ol) containing .product-item (li) entries
-  const products = element.querySelectorAll('.product-item');
+  // Skip product lists inside tab containers — those are handled by the tabs parser
+  if (element.closest('[role="tabpanel"], .tab-align-left, .tabs-content, .ui-tabs-panel')) return;
+
+  // element = product list container (ol/ul/div) with product items
+  let products = element.querySelectorAll('.product-item');
+  if (products.length === 0) {
+    products = element.querySelectorAll('li, [class*="product"]');
+  }
+
+  // Limit to 3 products to match the visible carousel items on the original page
+  products = [...products].slice(0, 3);
 
   const cells = [];
   products.forEach((product) => {
-    // Product image
-    const photoLink = product.querySelector('.product-item-photo');
-    const productImg = product.querySelector('.product-image-photo.photo');
+    // Product image — Magento classes, then generic img inside photo/image link
+    const productImg = product.querySelector('.product-image-photo.photo')
+      || product.querySelector('.product-item-photo img')
+      || product.querySelector('[class*="product-image"] img')
+      || product.querySelector('a img');
 
-    // Product details
-    const nameLink = product.querySelector('.product-item-link');
+    // Product type + weight from the details-top area
+    // Type text (e.g. "koffiebonen") is extracted by subtracting weight from full text
+    const detailsTop = product.querySelector('.product-item-details-top .small')
+      || product.querySelector('.product-item-details-top');
+    let typeText = null;
+    let weightText = null;
+    if (detailsTop) {
+      const fullText = detailsTop.textContent.replace(/\s+/g, ' ').trim();
+      const weightDiv = detailsTop.querySelector('div');
+      weightText = weightDiv ? weightDiv.textContent.replace(/\s+/g, ' ').trim() : null;
+      if (weightText && fullText.length > weightText.length) {
+        typeText = fullText.replace(weightText, '').trim();
+      }
+    }
+
+    // Product details — specific Magento, then generic heading/link
+    const nameLink = product.querySelector('.product-item-link')
+      || product.querySelector('h2 a, h3 a, [class*="product-name"] a');
     const strengthLabel = product.querySelector('.strength-label');
     const description = product.querySelector('.product-item-description');
-    const specialPrice = product.querySelector('.special-price .price');
+    const specialPrice = product.querySelector('.special-price .price')
+      || product.querySelector('.price');
     const oldPrice = product.querySelector('.old-price .price');
-    const ctaLink = product.querySelector('.actions-primary a');
+    const ctaLink = product.querySelector('.actions-primary a')
+      || product.querySelector('[class*="actions"] a, .tocart');
 
     // Image cell with field hint
     const imageFrag = document.createDocumentFragment();
@@ -72,6 +104,14 @@ export default function parse(element, { document }) {
     // Text cell with field hint
     const textFrag = document.createDocumentFragment();
     textFrag.appendChild(document.createComment(' field:text '));
+
+    // Product type + weight combined (e.g. "koffiebonen · 1 kg | 22,49/kg")
+    if (typeText || weightText) {
+      const p = document.createElement('p');
+      const parts = [typeText, weightText].filter(Boolean);
+      p.textContent = parts.join(' · ');
+      textFrag.appendChild(p);
+    }
 
     // Product name as heading
     if (nameLink) {

@@ -150,6 +150,26 @@ export default function transform(hookName, element, payload) {
       }
     }
 
+    // Remove duplicate consecutive images (Magento lazy-load creates two identical <img> tags)
+    element.querySelectorAll('p, div, figure').forEach((container) => {
+      const imgs = container.querySelectorAll('img');
+      if (imgs.length < 2) return;
+      const seen = new Set();
+      imgs.forEach((img) => {
+        const src = img.src || img.getAttribute('data-src') || '';
+        if (seen.has(src)) {
+          img.remove();
+        } else {
+          seen.add(src);
+        }
+      });
+    });
+
+    // Remove empty headings (e.g. <h3 id=""></h3>)
+    element.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((h) => {
+      if (h.textContent.trim() === '') h.remove();
+    });
+
     // Remove data-* attributes and event handlers
     element.querySelectorAll('*').forEach((el) => {
       el.removeAttribute('onclick');
