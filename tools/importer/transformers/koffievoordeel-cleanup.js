@@ -111,6 +111,14 @@ export default function transform(hookName, element, payload) {
           }
         }
       });
+
+      // Remove mobile section duplicates (direct children of .column.main with class "mobile").
+      // These are full-section mobile variants that duplicate desktop sections.
+      [...mainColBefore.children].forEach((child) => {
+        if (child.classList.contains('mobile')) {
+          child.remove();
+        }
+      });
     }
 
     // Remove hidden desktop step duplicates (column-groups near .kv-steps-slider)
@@ -144,7 +152,7 @@ export default function transform(hookName, element, payload) {
       // Non-content elements
       '#coupon-message-block',
       'noscript',
-      'iframe',
+      'iframe:not([src*="vimeo"]):not([src*="youtube"])',
       'link',
       // Hidden empty anchor (hero-quote source)
       '#favoriete-koffie',

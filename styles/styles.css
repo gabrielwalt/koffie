@@ -15,8 +15,8 @@
   --text-muted-color: #8f9090;
   --link-color: #442a18;
   --link-hover-color: #2e1c10;
-  --accent-color: #d13a39;
-  --accent-hover-color: #a82e2e;
+  --accent-color: #37b24d;
+  --accent-hover-color: #2b8a3e;
   --accent-text-color: #e03e2d;
   --success-color: #37b24d;
 
@@ -58,7 +58,7 @@
   --transition-base: var(--transition-speed) var(--transition-ease);
 
   /* buttons */
-  --button-border-radius: 4px;
+  --button-border-radius: 9999px;
   --button-padding: 15px 24px;
   --button-font-size: 16px;
   --button-font-weight: 700;
@@ -311,6 +311,10 @@ main .section.beige {
   background-color: #f5f0eb;
   padding-top: var(--spacing-l, 32px);
   padding-bottom: var(--spacing-l, 32px);
+}
+
+main .section.beige .default-content-wrapper {
+  text-align: center;
 }
 
 /* eyebrow text before heading in beige sections */

@@ -103,6 +103,7 @@
           "id": "section-5",
           "name": "Subscription Explanation",
           "selector": "#uitleg",
+          "headingMatch": "Bespaar tot 20%",
           "style": "beige",
           "blocks": [],
           "defaultContent": []
@@ -111,6 +112,7 @@
           "id": "section-6",
           "name": "FAQ",
           "selector": "#YDF0B3T",
+          "headingMatch": "Veelgestelde vragen",
           "style": null,
           "blocks": [
             "accordion-faq"
@@ -204,7 +206,7 @@
         {
           "name": "embed",
           "instances": [
-            ".pagebuilder-video-container iframe[src*='vimeo']"
+            ".pagebuilder-video-container"
           ]
         }
       ],

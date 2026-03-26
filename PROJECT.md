@@ -81,10 +81,14 @@ Migrated from koffievoordeel.nl — warm browns, red accents, serif headings.
 
 | Style (UE) | Class on section | CSS | Used on |
 |--------------|------------------|-----|---------|
-| Highlight | `highlight` → `.section.highlight` | `styles/styles.css` — light background | General |
-| Beige | `beige` → `.section.beige` | `styles/styles.css` — `background-color: #f5f0eb` | Abonnement section 5 |
+| Highlight | `highlight` → `.section.highlight` | `styles/styles.css` — `var(--light-color)` beige bg | General |
+| Light | `light` → `.section.light` | Same as highlight | General |
+| Beige | `beige` → `.section.beige` | `background-color: #f5f0eb` + eyebrow text styling | Abonnement section 5, brand-landing section 9 |
+| Italia | `italia` → `.section.italia` | Italian flag gradient ribbon `::after` (green/white/red, 6px) | Brand-landing section 9 (combined with beige) |
+| Dark | `dark` → `.section.dark` | Dark bg (#2b2b2b), white text/headings/links | Brand-landing sections 5, 7 |
+| Brand-hero | `brand-hero` → `.section.brand-hero` | Zero margin+padding (full-bleed) | Brand-landing section 1 |
 
-The section model’s multiselect (`models/_section.json`) exposes **Highlight** and **Beige**.
+The section model’s multiselect (`models/_section.json`) exposes these styles. Multiple styles can be combined (e.g. `beige, italia`).
 
 ---
 
@@ -108,14 +112,16 @@ Default content types come from `models/` spreads.
 
 | Block | Variants | Purpose | Import selector |
 |-------|----------|---------|-----------------|
-| `hero-subscription` | — | Subscription hero with bg image + feature cards | `.column.main .pagebuilder-column.shadow-cards` |
+| `hero-subscription` | — | Subscription hero with bg image + feature cards | `.pagebuilder-column.shadow-cards` |
 | `cards-steps` | — | Horizontal step cards ("Hoe werkt het") | `.kv-steps-slider` |
 | `cards-category` | Default, **Brands** | Category icons / brand logos grid | `.coffeType-mobile-icon` / `.desktop [class*="brand-abo"]` |
 | `cards-product` | — | Product card (image, name, intensity, price, CTA) | _(used as richtext inside tabs)_ |
 | `banner` | — | Art-directed responsive banner (desktop + mobile `<picture>`) | `img[src*="1440x450_desk"]` |
 | `tabs` | — | ARIA tab navigation (container with label + richtext panels) | `.tab-align-left` |
 | `accordion-faq` | — | FAQ accordion (`<details>/<summary>`) | `[data-collapsible="true"]` |
-| `hero-quote` | — | Hero with quote styling | _(not used on abonnement)_ |
+| `hero-quote` | — | Hero with quote styling | Used on content-article pages |
+| `blog-header` | — | Blog post header (author, date, reading time) | Blog article pages |
+| `embed` | — | Video embeds (Vimeo) | Instructional pages |
 
 ### Header and footer (chrome blocks)
 
@@ -162,41 +168,60 @@ Both are fragment-based: `header.js` loads `/nav.plain.html`, `footer.js` loads 
 
 ## Import infrastructure
 
-**Status**: Active — abonnement-page template complete and importing successfully.
+**Status**: Active — universal importer handles all 5 templates. All 6 pages importing successfully.
 
-### Templates
+### Universal importer
 
-| Template | Import script | URL list | Status |
-|----------|--------------|----------|--------|
-| `abonnement-page` | `import-abonnement-page.js` | `urls-abonnement-page.txt` | Working |
+Single `tools/importer/import.js` replaces per-template scripts. Uses:
+- **PARSER_REGISTRY**: Maps block names → parser functions
+- **TEMPLATES**: Loaded from `page-templates.json` (5 templates)
+- **PAGE_HOOKS**: Template-specific hooks (currently only `brand-landing`)
+- **Template detection**: `findTemplate(url)` matches URL to template config
+
+### Templates (page-templates.json)
+
+| Template | URLs | Key blocks |
+|----------|------|------------|
+| `abonnement-page` | /abonnement | hero-subscription, cards-steps, cards-category, banner, tabs, accordion-faq |
+| `content-article` | /drie-heerlijke-illy-iperespresso-recepten, /terug-in-de-tijd-met-illy | columns, cards-product, tabs |
+| `instructional-page` | /abonnement-wijzigen | embed |
+| `brand-landing` | /gran-maestro-italiano-experience | hero, columns, tabs, cards |
+| `blog-article` | /blog/de-wetenschap-achter-de-perfecte-kop-koffie | columns, cards-product, accordion-faq |
 
 ### Parsers
 
 | Parser | File | Block | Source selector |
 |--------|------|-------|-----------------|
+| hero | `parsers/hero.js` | hero | `.header-banner-illy` |
 | hero-subscription | `parsers/hero-subscription.js` | hero-subscription | `.pagebuilder-column.shadow-cards` |
+| columns | `parsers/columns.js` | columns | Various column layouts |
+| cards | `parsers/cards.js` | cards | Generic card grids |
 | cards-steps | `parsers/cards-steps.js` | cards-steps | `.kv-steps-slider` |
 | cards-category | `parsers/cards-category.js` | cards-category | `.coffeType-mobile-icon` |
 | cards-category-brands | `parsers/cards-category-brands.js` | cards-category (brands) | `.desktop [class*="brand-abo"]` |
+| cards-product | `parsers/cards-product.js` | cards-product | Product card data |
 | banner | `parsers/banner.js` | banner | `img[src*="1440x450_desk"]` |
 | tabs | `parsers/tabs.js` | tabs | `.tab-align-left` |
-| cards-product | `parsers/cards-product.js` | cards-product | _(available, not in abonnement template)_ |
 | accordion-faq | `parsers/accordion-faq.js` | accordion-faq | `[data-collapsible="true"]` |
+| embed | `parsers/embed.js` | embed | Video embeds |
+| utils | `parsers/utils.js` | (shared) | `createBlockHelper()` |
 
 ### Transformers
 
 | Transformer | File | Hook | Purpose |
 |-------------|------|------|---------|
-| koffievoordeel-cleanup | `transformers/koffievoordeel-cleanup.js` | `beforeTransform` | Remove tracking, scripts, empty elements, post-FAQ junk |
+| koffievoordeel-cleanup | `transformers/koffievoordeel-cleanup.js` | `beforeTransform` + `afterTransform` | Remove tracking, duplicates, non-content elements, Trustpilot, mobile/desktop dups |
 | koffievoordeel-sections | `transformers/koffievoordeel-sections.js` | `afterTransform` | Insert `<hr>` section breaks + section-metadata via multi-strategy anchor finding |
 
-### Bundling
+### Bundling & running
 
-**Always use `aem-import-bundle.sh`** (not raw esbuild with `--format=esm`):
 ```bash
-bash $SCRIPTS_DIR/aem-import-bundle.sh --importjs tools/importer/import-abonnement-page.js
+# Bundle (IIFE format required by run-import.js)
+npx esbuild tools/importer/import.js --bundle --format=iife --global-name=CustomImportScript --outfile=tools/importer/import.bundle.js
+
+# Import all 6 pages
+node tools/importer/run-import.js --import-script tools/importer/import.bundle.js --urls tools/importer/urls.txt
 ```
-This creates IIFE format (`var CustomImportScript = ...`) required by `run-bulk-import.js`.
 
 ---
 
@@ -206,24 +231,19 @@ This creates IIFE format (`var CustomImportScript = ...`) required by `run-bulk-
 
 | Page | Source URL | Template | Status |
 |------|------------|----------|--------|
-| Abonnement | [/abonnement](https://www.koffievoordeel.nl/abonnement) | `abonnement-page` | **Imported** — 22 blocks, 7 sections |
-| Illy Iperespresso recepten | [/drie-heerlijke-illy-iperespresso-recepten](https://www.koffievoordeel.nl/drie-heerlijke-illy-iperespresso-recepten) | — | Not started |
-| Abonnement wijzigen | [/abonnement-wijzigen](https://www.koffievoordeel.nl/abonnement-wijzigen) | — | Not started |
-| Terug in de tijd met Illy | [/terug-in-de-tijd-met-illy](https://www.koffievoordeel.nl/terug-in-de-tijd-met-illy) | — | Not started |
-| Gran Maestro Italiano | [/gran-maestro-italiano-experience](https://www.koffievoordeel.nl/gran-maestro-italiano-experience) | — | Not started |
-| Blog — wetenschap koffie | [/blog/de-wetenschap-achter-de-perfecte-kop-koffie](https://www.koffievoordeel.nl/blog/de-wetenschap-achter-de-perfecte-kop-koffie) | — | Not started |
+| Abonnement | [/abonnement](https://www.koffievoordeel.nl/abonnement) | `abonnement-page` | **Imported** |
+| Illy Iperespresso recepten | [/drie-heerlijke-illy-iperespresso-recepten](https://www.koffievoordeel.nl/drie-heerlijke-illy-iperespresso-recepten) | `content-article` | **Imported** |
+| Abonnement wijzigen | [/abonnement-wijzigen](https://www.koffievoordeel.nl/abonnement-wijzigen) | `instructional-page` | **Imported** |
+| Terug in de tijd met Illy | [/terug-in-de-tijd-met-illy](https://www.koffievoordeel.nl/terug-in-de-tijd-met-illy) | `content-article` | **Imported** |
+| Gran Maestro Italiano | [/gran-maestro-italiano-experience](https://www.koffievoordeel.nl/gran-maestro-italiano-experience) | `brand-landing` | **Imported** |
+| Blog — wetenschap koffie | [/blog/de-wetenschap-achter-de-perfecte-kop-koffie](https://www.koffievoordeel.nl/blog/de-wetenschap-achter-de-perfecte-kop-koffie) | `blog-article` | **Imported** |
 
-### Abonnement content verification
+### Notable import decisions
 
-| Content | Captured | Details |
-|---------|----------|---------|
-| Hero / above-the-fold | Yes | hero-subscription with bg image + feature cards |
-| Body copy & headings | Yes | Section headings, subscription explanation text |
-| Images & alt text | Yes | Product images, brand logos, banner (art-directed). Placeholder images skipped. |
-| CTAs / links | Yes | "Bekijk en bestel" product CTAs, "Bekijk alle" category links |
-| Tabs | Yes | Koffiebonen (4 products) + Koffiecups (4 products) |
-| FAQ | Yes | 8 accordion items |
-| Section styling | Yes | Beige background on subscription explanation section |
+- **"Doe de test!" (GMI page)**: Original has no link — it's an Aiden Coffee Finder JS widget trigger (`data-element="empty_link"`, `data-advisor-id`). Imported as plain text.
+- **"Over smaak gesproken" (GMI page)**: Desktop/mobile duplicate sections. Mobile removed by cleanup. Hero gets CSS background image via `preTransform` hook.
+- **Trustpilot widgets**: Removed globally by cleanup transformer (both DOM elements and via CSS fallback).
+- **Placeholder product images**: Skipped by cards-product parser (Magento `small_image.jpg` placeholder).
 
 ---
 

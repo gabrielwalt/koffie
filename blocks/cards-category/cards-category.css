@@ -4,6 +4,10 @@
  * Matches koffievoordeel.nl "Kies je koffie" section
  */
 
+.cards-category {
+  margin: var(--spacing-l) 0;
+}
+
 .cards-category > ul {
   list-style: none;
   margin: 0;

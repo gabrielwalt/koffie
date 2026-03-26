@@ -76,6 +76,7 @@
 
 .section.brand-hero .hero.italia picture {
   position: static;
+  z-index: auto;
   max-width: 300px;
 }
 

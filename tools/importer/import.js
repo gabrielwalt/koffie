@@ -303,9 +303,35 @@ const PAGE_HOOKS = {
       const heroTable = createBlockTable(document, 'hero', secondCells);
       secondEl.replaceWith(heroTable);
 
-      // Remove both hero entries from pageBlocks so the generic loop skips them
+      // --- Remaining heroes (e.g. "Over smaak gesproken") → hero with bg image ---
+      const handledHeroes = new Set([heroBlocks[0], heroBlocks[1]]);
+      for (let h = 2; h < heroBlocks.length; h++) {
+        const el = heroBlocks[h].element;
+        const bg = bgImageMap.get(el);
+        const heading = el.querySelector('h2');
+        const cells = [];
+        if (bg) {
+          const imgFrag = document.createDocumentFragment();
+          imgFrag.appendChild(document.createComment(' field:image '));
+          const img = document.createElement('img');
+          img.src = bg;
+          imgFrag.appendChild(img);
+          cells.push([imgFrag]);
+        }
+        const txtFrag = document.createDocumentFragment();
+        txtFrag.appendChild(document.createComment(' field:text '));
+        if (heading) {
+          txtFrag.appendChild(heading.cloneNode(true));
+        }
+        cells.push([txtFrag]);
+        const table = createBlockTable(document, 'hero', cells);
+        el.replaceWith(table);
+        handledHeroes.add(heroBlocks[h]);
+      }
+
+      // Remove all handled hero entries from pageBlocks so the generic loop skips them
       for (let i = pageBlocks.length - 1; i >= 0; i--) {
-        if (pageBlocks[i] === heroBlocks[0] || pageBlocks[i] === heroBlocks[1]) {
+        if (handledHeroes.has(pageBlocks[i])) {
           pageBlocks.splice(i, 1);
         }
       }
